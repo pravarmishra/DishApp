@@ -26,7 +26,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const Text=styled(TextField)`
 position:absolute;
-
+top-margin:5%;
 left: 0%;
 top:25%;
 
@@ -111,7 +111,7 @@ console.log(props)
       const { key } = e;
       const trimmedInput = ingridient.trim();
     
-      if (key =='Enter'&&tags.length<9&&trimmedInput.length<10 && !tags.includes(trimmedInput)) {
+      if (key =='Enter'&&trimmedInput.length>0 && !tags.includes(trimmedInput)) {
         e.preventDefault();
         setTags(prevState => [...prevState, trimmedInput]);
         setText1('');
@@ -151,13 +151,15 @@ return(show?
             <div>
           <div>
             <br/><br/><br/>
-          <Stack direction="row" spacing={1} className="container1">
+            
+          <Stack direction="row" spacing={1}  >
            {tags.map((tag,index) => 
             <Chip  onRequestDelete={()=>deleteTag(index)} >{tag}</Chip>
-                    
-            
    
-  )}</Stack></div><br/><br/>
+  )}</Stack>
+ 
+  
+  </div><br/><br/>
            <Text1 fullWidth
            value={ingridient}
            label="Enter Ingridients"

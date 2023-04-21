@@ -25,7 +25,7 @@ top: 120%;`
 
 const Text=styled(TextField)`
 position:absolute;
-
+top-margin:5%;
 left: 0%;
 top:30%;
 
@@ -80,7 +80,7 @@ console.log(props)
       const { key } = e;
       const trimmedInput = ingridient.trim();
     
-      if (key =='Enter'&&tags.length<4&&trimmedInput.length && !tags.includes(trimmedInput)) {
+      if (key =='Enter'&&trimmedInput.length>0 && !tags.includes(trimmedInput)) {
         e.preventDefault();
         setTags(prevState => [...prevState, trimmedInput]);
         setText1('');
@@ -135,7 +135,7 @@ return(show?(
             <div>
               <div>
               <br/><br/><br/>
-          <Stack direction="row" spacing={1} className="container1">
+          <Stack direction="row" spacing={1} >
            {tags.map((tag,index) => 
             <Chip  onRequestDelete={()=>deleteTag(index)} >{tag}</Chip>
                     

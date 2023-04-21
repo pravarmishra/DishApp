@@ -3,7 +3,7 @@
   box-sizing: border-box;
   position: absolute;
   
-  height: auto;
+  
   
   
 
@@ -27,6 +27,7 @@
   align-content:center;
   width: 100%;
  top: 2%;
+ 
 
  
  
@@ -101,8 +102,8 @@ a :hover{
     color: rgb(55, 85, 150);
    left: 25%;
    
-   padding-top: 10px;
-   font-size: xx-large;
+   
+   
    
   
   }
@@ -111,9 +112,9 @@ a :hover{
   position: absolute;
   color: rgb(55, 85, 150);
  left: 25%;
- padding-top: 10px;
- font-size: xx-large;
  
+ 
+ top: 0%;
 
 }
 .fontcolor1{
@@ -191,8 +192,10 @@ left:60px;
 .container1{
   position: relative;
   margin-left: 0px;
+  /* width: 200px !important; */
   top: 75%;
-  width:50%;
+  
+  
   
   
 }
