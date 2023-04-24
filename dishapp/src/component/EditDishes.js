@@ -24,15 +24,15 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 // left: 45%;`
 
-const Text=styled(TextField)`
-position:absolute;
-top-margin:5%;
-left: 0%;
-top:25%;
+// const Text=styled(TextField)`
+// position:absolute;
+// top-margin:5%;
+// left: 0%;
+// top:25%;
 
-`
+// `
 const Text1=styled(TextField)`
-position:absolute;
+position:relative;
 
 left: 0%;
 top:75%;
@@ -62,6 +62,13 @@ top:120px;
 //  &:hover {
 //     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
 //   }
+
+const Stack1=styled(Stack)`
+max-width:10% !important;
+`
+
+
+
 
 
 const EditDishes=(props)=>{
@@ -138,35 +145,34 @@ return(show?
       <h1 className="fontcolor">Edit Dish</h1>
       <br/>
       <br/>
+      <br/>
       <form  onSubmit={onSubmit} >
         {/* <h1>{props.dishName}</h1> */}
-        <div ><Text  fullWidth label="Enter Dish name"
+        <div ><TextField  fullWidth label="Enter Dish name"
                         onChange={(e)=>setText(e.target.value)} value={dishName}
                         />
                         
-            <br/>
-            <br/>
+            
             {/* <Ingredients  onChange={(e)=>seText1(e.target.value)} data={props.props.ingridient}/> */}
 
-            <div>
-          <div>
-            <br/><br/><br/>
             
-          <Stack direction="row" spacing={1}  >
+          
+            
+           <br/>
+          <Stack marginTop={1} direction="row" flexWrap={"wrap"} useFlexGap spacing={1}  >
            {tags.map((tag,index) => 
             <Chip  onRequestDelete={()=>deleteTag(index)} >{tag}</Chip>
    
   )}</Stack>
- 
+ <br/>
   
-  </div><br/><br/>
-           <Text1 fullWidth
+           <TextField fullWidth
            value={ingridient}
            label="Enter Ingridients"
            onKeyDown={onKeyDown}
            onChange={onChange}/>
       
-        </div>
+        
             <br/>
             <br/>
             {btn===true?<Button3 

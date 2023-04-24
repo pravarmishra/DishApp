@@ -121,28 +121,29 @@ return(show?(
       <h1 className="fontcolor2">Add Dish</h1>
       <br/>
       <br/>
+      <br/>
       
       <form  onSubmit={onSubmit} >
         {/* <h1>{props.dishName}</h1> */}
-        <div ><Text  fullWidth label="Enter Dish name"
+        <div ><TextField  fullWidth label="Enter Dish name"
                         onChange={(e)=>setText(e.target.value)} 
                         />
                         
-            <br/>
-            <br/>
+           
             
             {/* <Ingridients  onChange={(e)=>seText1(e.target.value)} data={ingridient}/> */}
             <div>
               <div>
-              <br/><br/><br/>
-          <Stack direction="row" spacing={1} >
+              <br/>
+          <Stack direction="row" flexWrap={"wrap"} useFlexGap marginTop={1}  spacing={1} >
            {tags.map((tag,index) => 
             <Chip  onRequestDelete={()=>deleteTag(index)} >{tag}</Chip>
                     
             
    
-  )}</Stack></div><br/><br/>
-           <Text1 
+  )}</Stack></div><br/>
+           <TextField
+           
            fullWidth
            value={ingridient}
            label="Enter ingridients"

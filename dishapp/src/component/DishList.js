@@ -14,6 +14,9 @@ import axios from "axios";
 import Alert from "@mui/material";
 import EditDishes from "./EditDishes";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+// import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import ChevronRightSharpIcon from '@mui/icons-material/ChevronRightSharp';
+import ChevronLeftSharpIcon from '@mui/icons-material/ChevronLeftSharp';
 
 const Div2=styled(Paper)`
 *{
@@ -105,6 +108,7 @@ const DishCard = (props) => {
   const records = users.slice(firstIndex, lastIndex);
   const npage = Math.ceil(users.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
+  
  
   const [value1, setValue1] = useState("");
   const [state, updatedState] = useState(-1);
@@ -198,13 +202,16 @@ const DishCard = (props) => {
 <br/>
       
         <ul>
+          <div className="btn1">
           <ButtonGroup variant="outlined" >
+            <Button onClick={() => PrevPage()}>P</Button>
             {numbers.map((n, i) => (
               <a key={i}>
                 <Button1 onClick={() => changeCPage(n)}>{n}</Button1>
               </a>
             ))}
-          </ButtonGroup>
+            <Button onClick={() => nextPage()}>N</Button>
+          </ButtonGroup></div>
         </ul>
         {show?<div><AddDishes/></div>:null}
       </Div2></div></div>  
@@ -215,15 +222,15 @@ const DishCard = (props) => {
   function PrevPage() {
     if (currentPage !== firstIndex) {
       setCurrentPage(currentPage - 1);
-    } else {
+    } if (currentPage===1) {
       setCurrentPage(currentPage);
     }
   }
   function nextPage() {
     if (currentPage !== lastIndex) {
       setCurrentPage(currentPage + 1);
-    } else {
-      setCurrentPage(currentPage - 1);
+    } if (currentPage===numbers.length) {
+      setCurrentPage(currentPage);
     }
   }
   function changeCPage(id) {

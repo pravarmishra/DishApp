@@ -9,6 +9,7 @@
 
 }
 
+
 /* .column2{
   box-sizing: border-box;
   width: 60%;
@@ -27,19 +28,15 @@
   align-content:center;
   width: 100%;
  top: 2%;
+ height: auto;
  
 
  
  
   left: 500px;
+  right: 500px;
  text-align: center  ;
-  
- 
-  
-  
-  
-  
-}
+  }
 /* .column4 {
   box-sizing: content-box;
   
@@ -112,7 +109,7 @@ a :hover{
   position: absolute;
   color: rgb(55, 85, 150);
  left: 25%;
- 
+ margin-bottom: 10%;
  
  top: 0%;
 
@@ -212,4 +209,20 @@ left:60px;
   position: absolute;
   bottom: 0%;
   margin-left: 40%;
+}
+
+
+
+.btn1{
+  position: absolute;
+  top: 80%;
+  left: 6%;
+}
+
+.chip{
+  width:max-content;
+  max-width: 400px !important;
+  max-height: 200px;
+  flex-direction: row;
+  
 }
