@@ -108,6 +108,7 @@ const DishCard = (props) => {
   const records = users.slice(firstIndex, lastIndex);
   const npage = Math.ceil(users.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
+ const [btn,showBtn]=useState(true)
   
  
   const [value1, setValue1] = useState("");
@@ -204,13 +205,13 @@ const DishCard = (props) => {
         <ul>
           <div className="btn1">
           <ButtonGroup variant="outlined" >
-            <Button onClick={() => PrevPage()}>P</Button>
+           {currentPage!=1 ?<Button onClick={() => PrevPage()}>P</Button>:null}
             {numbers.map((n, i) => (
               <a key={i}>
                 <Button1 onClick={() => changeCPage(n)}>{n}</Button1>
               </a>
             ))}
-            <Button onClick={() => nextPage()}>N</Button>
+            {currentPage!=numbers.length?<Button onClick={() => nextPage()}>N</Button>:null}
           </ButtonGroup></div>
         </ul>
         {show?<div><AddDishes/></div>:null}
