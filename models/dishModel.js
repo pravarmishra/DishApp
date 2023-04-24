@@ -4,7 +4,8 @@ const dishSchema=new mongoose.Schema({
     dishName:{
         type:String,
         trim:true,
-        required:[true,'Please add dish']
+        required:[true,'Please add dish'],
+        unique:true
     },
     ingridient:{
         type:[String],

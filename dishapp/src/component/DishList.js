@@ -215,7 +215,7 @@ const DishCard = (props) => {
             {currentPage!=numbers.length?<Button onClick={() => nextPage()}>N</Button>:null}
           </ButtonGroup></div>
         </ul>
-        {show?<div><AddDishes/></div>:null}
+        {show?<div><AddDishes /></div>:null}
       </Div2></div></div>  
       {/* {show?<div><AddDishes/></div>:null} */}
     </div>
