@@ -8,7 +8,7 @@ const dishSchema=new mongoose.Schema({
     },
     ingridient:{
         type:[String],
-        
+        trim:true,
         required:[true, 'Please add ingridients']
     },
     createdAt:{

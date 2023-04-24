@@ -10,13 +10,13 @@ import Button from "@mui/material/Button";
 import { ButtonGroup, Card, CardContent } from "@mui/material";
 import { styled } from "@mui/material";
 import Paper from "material-ui/Paper";
-import axios from "axios";
-import Alert from "@mui/material";
+// import axios from "axios";
+// import Alert from "@mui/material";
 import EditDishes from "./EditDishes";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 // import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import ChevronRightSharpIcon from '@mui/icons-material/ChevronRightSharp';
-import ChevronLeftSharpIcon from '@mui/icons-material/ChevronLeftSharp';
+// import ChevronRightSharpIcon from '@mui/icons-material/ChevronRightSharp';
+// import ChevronLeftSharpIcon from '@mui/icons-material/ChevronLeftSharp';
 
 const Div2=styled(Paper)`
 *{
@@ -100,7 +100,7 @@ const DishCard = (props) => {
     const [search,setSearch]=useState('')
   
   const [currentPage, setCurrentPage] = useState(1);
-  var [current, setCurrentData] = useState("");
+ 
   const [show, setShow] = useState(null);
   const recordsPerPage = 7;
   const lastIndex = currentPage * recordsPerPage;
@@ -108,10 +108,10 @@ const DishCard = (props) => {
   const records = users.slice(firstIndex, lastIndex);
   const npage = Math.ceil(users.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
- const [btn,showBtn]=useState(true)
+
   
  
-  const [value1, setValue1] = useState("");
+ 
   const [state, updatedState] = useState(-1);
   
 
@@ -125,10 +125,11 @@ const DishCard = (props) => {
 
   const onChange = (e) => {
     const matched=dishes.filter((user)=>{
-      return`${user.dishName}`.includes(e.target.value)
+      return`${user.dishName}`.toLowerCase().includes(e.target.value)
     })
     setUsers(matched);
-    setSearch(e.target.value)
+    setSearch(e.target.value);
+    setCurrentPage(1)
   };
 
   function handleEdit(id, dish) {
@@ -144,7 +145,7 @@ const DishCard = (props) => {
       <div className="row" >
         <div className="column" >
         <Div2 >
-          <h1 className='fontcolor1'>Dishes List</h1>
+          <h1 className='fontcolor1'>Dishes</h1>
         <a><Button3 startIcon={<AddCircleIcon/>}  variant="outlined" onClick={()=>setShow(true)}  >Create</Button3></a>
         <br/>
         <br/>
