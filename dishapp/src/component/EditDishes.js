@@ -40,7 +40,7 @@ const Text1 = styled(TextField)`
 const Button3 = styled(Button)`
   position: absolute;
   left: 35%;
-  top: 120%;
+  top: 100%;
 `;
 
 const Div1 = styled(Paper)`
@@ -69,14 +69,16 @@ const Stack1 = styled(Stack)`
 
 const EditDishes = (props) => {
   console.log(props);
+  const [show, setShow] = useState(true);
   useEffect(() => {
     console.log(props);
+    setShow(true);
   }, [props]);
 
   const [dishName, setText] = useState("");
   const [ingridient, setText1] = useState("");
   const { updateDish } = useContext(GlobalContext);
-  const [show, setShow] = useState(true);
+  
   const [tags, setTags] = useState(props.props.ingridient);
   const [open, setOpen] = useState(false);
   const [btn, setBtn] = useState(true);
@@ -87,23 +89,23 @@ const EditDishes = (props) => {
   console.log(props);
 
   const onSubmit = (e) => {
+    
     let newDishes = {
-      id: props.props._id,
+      id:props.props._id,
       dishName,
       ingridient: tags,
     };
     console.log("abc", newDishes);
+    
     updateDish(newDishes);
     // window.location.reload(false)
 
     setBtn(false);
     setOpen(true);
-    setTimeout(function(){
-      setShow(false)
-    },3500); 
-    // setTimeout(function () {
-    //   window.location.reload();
-    // }, 3500);
+   
+    setTimeout(function () {
+      setShow(false);
+    }, 3500);
   };
   const onChange = (e) => {
     const { value } = e.target;

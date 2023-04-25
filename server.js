@@ -15,6 +15,14 @@ if(process.env.NODE_ENV==='development'){
     app.use(morgan('dev'))
 }
 app.use('/api/v1/dishes',dishes)
+app.use(function(err, req, res, next) {
+    if (err.name === 'MongoError' && err.code === 11000) {
+      // Duplicate key error
+      res.status(400).json({ message: 'Title must be unique' });
+    } else {
+      res.status(500).json({ message: err.message });
+    }
+  });
 if(process.env.NODE_ENV==='production'){
     app.use(express.static('dishapp/build'))
 

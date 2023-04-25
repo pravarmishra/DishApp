@@ -17,5 +17,7 @@ const dishSchema=new mongoose.Schema({
         default:Date.now
     }
 })
+dishSchema.index( { dishName: 1 }, { unique: true } )
+
 
 module.exports=mongoose.model('Dishes',dishSchema);

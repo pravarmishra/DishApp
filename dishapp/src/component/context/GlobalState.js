@@ -35,7 +35,7 @@ export const GlobalProvider=({children})=>{
                 payload:res.data.data
         })
         console.log(dish)
-
+           getDish()
             
         }
         catch(err){

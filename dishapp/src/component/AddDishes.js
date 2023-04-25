@@ -14,13 +14,14 @@ import { Stack } from "@mui/material";
 import Chip from "material-ui/Chip";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { set } from "mongoose";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const Button2 = styled(Button)`
   position: absolute;
   left: 35%;
-  top: 120%;
+  top: 100%;
 `;
 
 const Text = styled(TextField)`
@@ -52,19 +53,24 @@ align-items:center;
 
 const AddDishes = (props) => {
   console.log(props);
+  const [show, setShow] = useState(true);
   useEffect(() => {
     console.log(props);
+    setShow(true);
+    setData(dishes);
   }, [props]);
-
+const {dishes}=useContext(GlobalContext);
+const [data,setData]=useState();
+const [error, setError] = useState("");
   const [dishName, setText] = useState("");
   const [ingridient, setText1] = useState("");
   const { addDish } = useContext(GlobalContext);
   // const [input, setInput] = useState('');
   const [tags, setTags] = useState([]);
-  const [show, setShow] = useState(true);
+  
   const [open, setOpen] = useState(false);
   const [btn, setBtn] = useState(true);
-  const [error,setError] = useState(null);
+  
 
   const onChange = (e) => {
     const { value } = e.target;
@@ -91,24 +97,25 @@ const AddDishes = (props) => {
   };
 
   const onSubmit = (e) => {
+    const trimmedInput=dishName.trim();
+    if (dishes.includes(trimmedInput)) {
+      addDish(null)
+    }
     const newDishes = {
       id: Math.floor(Math.random() * 100000),
       dishName,
       ingridient: tags,
     };
-    if(dishName.length===0&&ingridient.length===0){
-      setError(true);
-       
+    if (dishes.includes(newDishes.dishName)) {
+      addDish(null)
     }else{
-      setError(false);
-    }
     addDish(newDishes);
     setBtn(false);
     setOpen(true);
     setTimeout(function () {
       setShow(false);
     }, 4000);
-  };
+  }};
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -149,6 +156,7 @@ const AddDishes = (props) => {
                   useFlexGap
                   marginTop={1}
                   spacing={1}
+                  
                 >
                   {tags.map((tag, index) => (
                     <Chip onRequestDelete={() => deleteTag(index)}>{tag}</Chip>

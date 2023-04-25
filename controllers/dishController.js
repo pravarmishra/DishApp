@@ -46,6 +46,8 @@ exports.addDishes=async(req,res,next)=>{
                error: messages
            })
        }
+       
+        
        else{
            return res.status(500).json({
                success:false,
@@ -85,7 +87,7 @@ exports.addDishes=async(req,res,next)=>{
     }
   }
   exports.updateDish = async (req, res, next) => {
-    try{const dish = await dishModel.findByIdAndUpdate(req.params.id, req.body);
+    try{const dish = await dishModel.findByIdAndUpdate(req.params.id, req.body,{new: false});
       console.log(req.body)
   
     if (!dish) {
