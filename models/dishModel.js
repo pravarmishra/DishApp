@@ -17,7 +17,20 @@ const dishSchema=new mongoose.Schema({
         default:Date.now
     }
 })
-dishSchema.index( { dishName: 1 }, { unique: true } )
+dishSchema.statics.isThisDishInUse=async function(dishName){
+    try{
+        // const ldish=dishName.toLowerCase();
+        const user=await this.findOne({dishName})
+        if(user) return false
+
+        return true
+    }
+    catch(err){
+        console.log(err)
+    return false
+    
+    }
+}
 
 
 module.exports=mongoose.model('Dishes',dishSchema);

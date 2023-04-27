@@ -14,7 +14,7 @@ import { Stack } from "@mui/material";
 import Chip from "material-ui/Chip";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { set } from "mongoose";
+// import { set } from "mongoose";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -54,23 +54,33 @@ align-items:center;
 const AddDishes = (props) => {
   console.log(props);
   const [show, setShow] = useState(true);
+  const [open,setOpen] = useState(false);
+  const { dishes,err } = useContext(GlobalContext);
+  const [error,setError] = useState();
   useEffect(() => {
     console.log(props);
-    setShow(true);
-    setData(dishes);
+    setShow(true)
+    setOpen(false)
+    if(err){
+      setError(true)
+    }
+    else{
+      setError(false)
+    }
+    
+    // setData(dishes);
   }, [props]);
-const {dishes}=useContext(GlobalContext);
-const [data,setData]=useState();
-const [error, setError] = useState("");
+  
+  // const [data, setData] = useState();
+  
   const [dishName, setText] = useState("");
   const [ingridient, setText1] = useState("");
   const { addDish } = useContext(GlobalContext);
   // const [input, setInput] = useState('');
   const [tags, setTags] = useState([]);
+
   
-  const [open, setOpen] = useState(false);
   const [btn, setBtn] = useState(true);
-  
 
   const onChange = (e) => {
     const { value } = e.target;
@@ -97,26 +107,56 @@ const [error, setError] = useState("");
   };
 
   const onSubmit = (e) => {
-    const trimmedInput=dishName.trim();
-    if (dishes.includes(trimmedInput)) {
-      addDish(null)
-    }
+    
     const newDishes = {
       id: Math.floor(Math.random() * 100000),
-      dishName,
+      dishName:dishName.toLowerCase(),
       ingridient: tags,
-    };
-    if (dishes.includes(newDishes.dishName)) {
-      addDish(null)
-    }else{
-    addDish(newDishes);
-    setBtn(false);
-    setOpen(true);
-    setTimeout(function () {
-      setShow(false);
-    }, 4000);
-  }};
+    
+    }
+       
+      addDish(newDishes);
+      
+      if(error===false){
+        // setOn(false)
+        setOpen(true);
+        setBtn(false);
+      
+      
+      
+      }
+      else{
+        setOpen(false);
+        setBtn(true);
+        
+      }
+  }
+  
+      // function Snackbar(){
+      //   return (<Snackbar
+      //     className="alert"
+      //     open={on}
+      //     autoHideDuration={3000}
+      //     onClose={handleClose}
+      //   >
+      //     <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+      //       Dish already exist
+      //     </Alert>
+      //   </Snackbar>)
+      // }
+      // setTimeout(function () {
+      //   setShow(0);
+      // }, 35000);
+    
+  
   const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+  const handleClose1 = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
@@ -135,15 +175,15 @@ const [error, setError] = useState("");
         <form onSubmit={onSubmit}>
           {/* <h1>{props.dishName}</h1> */}
           <div>
-           <TextField
+            <TextField
+            
               fullWidth
-              
               label="Enter Dish name"
               onChange={(e) => setText(e.target.value)}
               required
               value={dishName}
-              
-              helperText={!dishName?"Dish name is required":null}
+              helperText={!error? "Dish name is required" : "Dish Already exists"}
+              error={error?true:false}
             />
 
             {/* <Ingridients  onChange={(e)=>seText1(e.target.value)} data={ingridient}/> */}
@@ -156,7 +196,6 @@ const [error, setError] = useState("");
                   useFlexGap
                   marginTop={1}
                   spacing={1}
-                  
                 >
                   {tags.map((tag, index) => (
                     <Chip onRequestDelete={() => deleteTag(index)}>{tag}</Chip>
@@ -170,12 +209,12 @@ const [error, setError] = useState("");
                 label="Enter ingredients"
                 onKeyDown={onKeyDown}
                 onChange={onChange}
-                
               />
             </div>
             <br />
             <br />
-            {btn === true && dishName && tags.length>0 ? (
+            
+            { dishName && tags.length > 0 ? (
               <Button2 variant="outlined" onClick={onSubmit}>
                 Add
               </Button2>
@@ -188,17 +227,27 @@ const [error, setError] = useState("");
 
           <Snackbar
             className="alert"
-            open={open}
+            open={open===true}
             autoHideDuration={3000}
             onClose={handleClose}
           >
             <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
-              Dish Added
+              Dish is being verified
             </Alert>
           </Snackbar>
+          {/* <Snackbar
+          className="alert"
+          open={!open}
+          autoHideDuration={3000}
+          onClose={handleClose1}
+        >
+          <Alert onClose={handleClose1} severity="error" sx={{ width: "100%" }}>
+            Dish already exist
+          </Alert>
+        </Snackbar> */}
         </form>
       </div>
     </div>
-  ) : null;
-};
+  ) : null
+            }
 export default AddDishes;

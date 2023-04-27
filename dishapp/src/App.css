@@ -216,7 +216,8 @@ left:60px;
 .btn1{
   position: absolute;
   top: 80%;
-  left: 5%;
+  left: 4.5%;
+ 
 }
 
 .chip{
@@ -228,6 +229,7 @@ left:60px;
 }
 
 .wrap{
-  flex-wrap: wrap;
-  width: auto;
+  flex-wrap:wrap;
+  
+  width: 80%;
 }

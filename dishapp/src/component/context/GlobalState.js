@@ -14,7 +14,7 @@ export const GlobalContext=createContext(initialState)
 export const GlobalProvider=({children})=>{
     const [state,dispatch]=useReducer(AppReducer,initialState)
     
-
+    const [err,setErr]=useState(null)
     //Actions
 
    
@@ -39,10 +39,11 @@ export const GlobalProvider=({children})=>{
             
         }
         catch(err){
-            dispatch({
-                type:'DISH_ERROR',
-                payload:err.res.data.error
-            })
+            setErr(err)
+            // dispatch({
+            //     type:'DISH_ERROR',
+            //     payload:err.res.data.error
+            // })
              console.log(err)
         }
     }
@@ -93,13 +94,16 @@ async function addDish(dish){
         payload:res.data.data
 
     })
+    
     console.log(dish)
 }
 catch(err){
-    dispatch({
-        type:'DISH_ERROR',
-        payload:err.res.data.error
-    })
+    setErr(err)
+    // dispatch({
+    //     type:'DISH_ERROR',
+    //     payload:err.res.data.error
+    // })
+    console.error(err);
 }
 }
 function deleteDish(id){
@@ -107,6 +111,7 @@ function deleteDish(id){
         type:'DELETE_DISHES',
         payload:id
     })
+    getDish()
 }
 
 
@@ -114,7 +119,7 @@ function deleteDish(id){
 
 
 return (<GlobalContext.Provider value={{
-    dishes:state.dishes,addDish,deleteDish,getDish,error:state.error,loading:state.loading,getpageDish,updateDish
+    dishes:state.dishes,addDish,deleteDish,getDish,error:state.error,loading:state.loading,getpageDish,updateDish,err
 }}>
     {children}
 </GlobalContext.Provider>

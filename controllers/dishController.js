@@ -30,16 +30,24 @@ exports.getDishes=async ( req,res,next)=>{
 //Add dish
 exports.addDishes=async(req,res,next)=>{
     try{const {dishName,ingridient}=req.body
+    const dish1=dishName.toLowerCase();
+    const isNewDish=await dishModel.isThisDishInUse(dish1);
+    if(!isNewDish){
+      return res.status(400).json({success:false,message:"dish name already there",data:res.status});
+    }
+      else{
     const dish=await dishModel.create(req.body)
+    
+   
     return res.status(201).json({
        success:true,
        data: dish
     })
     console.log(dish)
-   }
+   }}
    catch(err){
     console.log(err)
-       if(err.name==='ValidationError'){
+       if(err.name==='ValidationError'||res.json.success==='false'){
            const messages=Object.values(err.errors).map(val=>val.message)
            return res.status(400).json({
                success:false,

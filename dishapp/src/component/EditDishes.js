@@ -77,8 +77,8 @@ const EditDishes = (props) => {
 
   const [dishName, setText] = useState("");
   const [ingridient, setText1] = useState("");
-  const { updateDish } = useContext(GlobalContext);
-  
+  const { updateDish,err } = useContext(GlobalContext);
+
   const [tags, setTags] = useState(props.props.ingridient);
   const [open, setOpen] = useState(false);
   const [btn, setBtn] = useState(true);
@@ -89,23 +89,25 @@ const EditDishes = (props) => {
   console.log(props);
 
   const onSubmit = (e) => {
-    
     let newDishes = {
-      id:props.props._id,
+      id: props.props._id,
       dishName,
       ingridient: tags,
     };
     console.log("abc", newDishes);
-    
+
     updateDish(newDishes);
     // window.location.reload(false)
-
+if(!err){
     setBtn(false);
     setOpen(true);
-   
-    setTimeout(function () {
-      setShow(false);
-    }, 3500);
+}
+else{
+  setBtn(true);
+}
+    // setTimeout(function () {
+    //   setShow(false);
+    // }, 3500);
   };
   const onChange = (e) => {
     const { value } = e.target;
@@ -183,7 +185,7 @@ const EditDishes = (props) => {
 
             <br />
             <br />
-            {btn === true && dishName && tags.length>0 ? (
+            {btn === true && dishName && tags.length > 0 ? (
               <Button3 variant="outlined" onClick={onSubmit}>
                 Update
               </Button3>

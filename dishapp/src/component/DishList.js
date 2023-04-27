@@ -3,11 +3,11 @@ import { GlobalContext } from "./context/GlobalState";
 import AddDishes from "./AddDishes";
 
 import "../App.css";
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { ButtonGroup, Card, CardContent } from "@mui/material";
+import { ButtonGroup, Card, CardContent, Pagination } from "@mui/material";
 import { styled } from "@mui/material";
 import Paper from "material-ui/Paper";
 // import axios from "axios";
@@ -51,8 +51,7 @@ const StyledCardContent = styled(CardContent)`
   align-items: center;
 `;
 const Button1 = styled(Button)`
-  broder: solid black;
-  width: 10px;
+  width: 1px;
   position: relative;
 `;
 
@@ -87,14 +86,16 @@ const DishCard = (props) => {
   const { dishes, getDish, getpageDish, dishName, ingridient, _id } =
     useContext(GlobalContext);
   const [users, setUsers] = useState(dishes);
-  const [show, setShow] = useState(null);
+  const [show, setShow] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(7);
   useEffect(() => {
     setUsers(dishes);
+    setShow(0);
     
   }, [dishes]);
   const [search, setSearch] = useState("");
-
-  const [currentPage, setCurrentPage] = useState(1);
+  
 
   // const [show, setShow] = useState(null);
   const recordsPerPage = 7;
@@ -102,18 +103,25 @@ const DishCard = (props) => {
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = users.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(users.length / recordsPerPage);
+  const npage = Math.ceil(users.length / itemsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
-
+  const [page, setPage] = useState(1);
   const [state, updatedState] = useState(-1);
 
   useEffect(() => {
     getDish();
   }, []);
-
+  const handleChangePage = (e, value) => {
+    setCurrentPage(value);
+  };
   const onChange = (e) => {
     const matched = dishes.filter((user) => {
-      return `${user.dishName}`.toLowerCase().includes(e.target.value);
+      return (
+        `${user.dishName}`
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase()) ||
+        `${user.dishName}`.toUpperCase().includes(e.target.value.toUpperCase())
+      );
     });
     setUsers(matched);
     setSearch(e.target.value);
@@ -121,14 +129,24 @@ const DishCard = (props) => {
   };
 
   function handleEdit(id, dish) {
-    setShow(false||false);
+    setShow(1);
 
     updatedState(id);
 
     console.log("click");
-    
-    
   }
+  // function handleAdd(){
+  //   if (show===0 ||show===1){
+  //     setShow(2);
+  //   }
+  //   if(show===2){
+  //     setShow(0);
+  //     setShow(2);
+  //   }
+  //   else{
+  //     setShow(2)
+  //   }
+  // }
 
   return (
     <div>
@@ -140,7 +158,7 @@ const DishCard = (props) => {
               <Button3
                 startIcon={<AddCircleIcon />}
                 variant="outlined"
-                onClick={() => setShow(true)}
+                onClick={() => setShow(2)}
               >
                 Create
               </Button3>
@@ -161,7 +179,7 @@ const DishCard = (props) => {
             </div>
 
             {records.map((dish) =>
-              state === dish._id && show == false ? (
+              state === dish._id && show == 1 ? (
                 <div>
                   <div>
                     <EditDishes props={dish} />
@@ -171,7 +189,11 @@ const DishCard = (props) => {
                     onClick={() => handleEdit(dish._id)}
                   >
                     <a>
-                      <StyledCardContent> {dish.dishName}</StyledCardContent>
+                      <StyledCardContent>
+                        {" "}
+                        {dish.dishName.charAt(0).toUpperCase() +
+                          dish.dishName.slice(1)}
+                      </StyledCardContent>
                     </a>
                   </Border>
                 </div>
@@ -182,7 +204,11 @@ const DishCard = (props) => {
                     onClick={() => handleEdit(dish._id)}
                   >
                     <a>
-                      <StyledCardContent> {dish.dishName}</StyledCardContent>
+                      <StyledCardContent>
+                        {" "}
+                        {dish.dishName.charAt(0).toUpperCase() +
+                          dish.dishName.slice(1)}
+                      </StyledCardContent>
                     </a>
                   </Border>
                 </div>
@@ -209,24 +235,43 @@ const DishCard = (props) => {
         pageCount={numbers}
         previousLabel="< previous"
         renderOnZeroPageCount={null}
-      /> */}     <div className="wrap">  
-                <ButtonGroup variant="outlined"  size="small" >
-                  {currentPage != 1 ? (
-                    <Button1 onClick={() => PrevPage()}>P</Button1>
-                  ) : null}
-                  {numbers.map((n, i) => (
-                    <a key={i}>
-                      <Button1 onClick={() => changeCPage(n)}>{n}</Button1>
-                    </a>
-                  ))}
-                  {currentPage != numbers.length ? (
-                    <Button1 onClick={() => nextPage()}>N</Button1>
-                  ) : null}
-                </ButtonGroup>
-                </div> 
+      /> */}{" "}
+                <div>
+                  <Stack>
+                    <Pagination
+                      page={currentPage}
+                      count={npage}
+                      onChange={handleChangePage}
+                      color="primary"
+                      size="small"
+                    >
+                      {users
+                        .slice(
+                          (currentPage - 1) * itemsPerPage,
+                          currentPage * itemsPerPage
+                        )
+                        .map((item) => (
+                          <div key={item.id}>{item.dishName}</div>
+                        ))}
+                    </Pagination>
+                  </Stack>
+                  {/* <ButtonGroup className="wrap" variant="outlined" size="small">
+                    {currentPage != 1 ? (
+                      <Button1 onClick={() => PrevPage()}>P</Button1>
+                    ) : null}
+                    {numbers.map((n, i) => (
+                      <a key={i}>
+                        <Button1 onClick={() => changeCPage(n)}>{n}</Button1>
+                      </a>
+                    ))}
+                    {currentPage != numbers.length ? (
+                      <Button1 onClick={() => nextPage()}>N</Button1>
+                    ) : null}
+                  </ButtonGroup> */}
+                </div>
               </div>
             </>
-            {show ? (
+            {show === 2 ? (
               <div>
                 <AddDishes />
               </div>
@@ -236,31 +281,31 @@ const DishCard = (props) => {
       </div>
       {/* {show?<div><AddDishes/></div>:null} */}
     </div>
-  );
+  );}
 
-  function PrevPage() {
-    if (currentPage !== firstIndex) {
-      setCurrentPage(currentPage - 1);
-    }
-    if (currentPage === 1) {
-      setCurrentPage(currentPage);
-    }
-  }
-  function nextPage() {
-    if (currentPage !== lastIndex) {
-      setCurrentPage(currentPage + 1);
-    }
-    if (currentPage === numbers.length) {
-      setCurrentPage(currentPage);
-    }
-  }
-  function changeCPage(id) {
-    setCurrentPage(id);
+//   function PrevPage() {
+//     if (currentPage !== firstIndex) {
+//       setCurrentPage(currentPage - 1);
+//     }
+//     if (currentPage === 1) {
+//       setCurrentPage(currentPage);
+//     }
+//   }
+//   function nextPage() {
+//     if (currentPage !== lastIndex) {
+//       setCurrentPage(currentPage + 1);
+//     }
+//     if (currentPage === numbers.length) {
+//       setCurrentPage(currentPage);
+//     }
+//   }
+//   function changeCPage(id) {
+//     setCurrentPage(id);
 
-    // const article={page:id}
-    // axios.post('api/v1/dishes/page',article)
-    // .then(response => console.log(response));
-  }
-};
+//     // const article={page:id}
+//     // axios.post('api/v1/dishes/page',article)
+//     // .then(response => console.log(response));
+//   }
+// };
 
 export default DishCard;
