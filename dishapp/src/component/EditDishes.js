@@ -69,6 +69,8 @@ const Stack1 = styled(Stack)`
 
 const EditDishes = (props) => {
   console.log(props);
+  const { updateDish,err } = useContext(GlobalContext);
+  const [error,setError]=useState()
   const [show, setShow] = useState(true);
   useEffect(() => {
     console.log(props);
@@ -77,7 +79,7 @@ const EditDishes = (props) => {
 
   const [dishName, setText] = useState("");
   const [ingridient, setText1] = useState("");
-  const { updateDish,err } = useContext(GlobalContext);
+ 
 
   const [tags, setTags] = useState(props.props.ingridient);
   const [open, setOpen] = useState(false);
@@ -99,11 +101,13 @@ const EditDishes = (props) => {
     updateDish(newDishes);
     // window.location.reload(false)
 if(!err){
-    setBtn(false);
-    setOpen(true);
+    
+    // setOpen(true);
+    setError(false)
 }
 else{
-  setBtn(true);
+  
+  setError(true)
 }
     // setTimeout(function () {
     //   setShow(false);
@@ -157,6 +161,8 @@ else{
               label="Enter Dish name"
               onChange={(e) => setText(e.target.value)}
               value={dishName}
+              helperText={!error? "" : "Dish Already exists"}
+              error={error?true:false}
             />
 
             {/* <Ingredients  onChange={(e)=>seText1(e.target.value)} data={props.props.ingridient}/> */}
@@ -185,7 +191,7 @@ else{
 
             <br />
             <br />
-            {btn === true && dishName && tags.length > 0 ? (
+            { dishName && tags.length > 0 ? (
               <Button3 variant="outlined" onClick={onSubmit}>
                 Update
               </Button3>

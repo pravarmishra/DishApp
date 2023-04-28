@@ -1,6 +1,12 @@
-import React ,{ createContext,useReducer, useState} from 'react'
+import React ,{ createContext,useEffect,useReducer, useState} from 'react'
 import AppReducer from './AppReducer'
 import axios from 'axios'
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 const initialState={
     dishes:[],error:null,loading:true
@@ -14,13 +20,40 @@ export const GlobalContext=createContext(initialState)
 export const GlobalProvider=({children})=>{
     const [state,dispatch]=useReducer(AppReducer,initialState)
     
-    const [err,setErr]=useState(null)
+    const [err,setErr]=useState()
     //Actions
 
-   
+    useEffect(() => {
+        setErr(false)
+    },[])
+    function tsnackbar(){
+        return <Snackbar
+        className="alert"
+        open={!err }
+        autoHideDuration={2000}
+        
+      >
+        <Alert  severity="info" sx={{ width: "100%" }}>
+          Dish is being verified
+        </Alert>
+      </Snackbar>
+    }
+     function fsnackbar(){
+        return <Snackbar
+        className="alert"
+        open={err }
+        autoHideDuration={2000}
+        
+      >
+        <Alert  severity="error" sx={{ width: "100%" }}>
+          Dish is already there
+        </Alert>
+      </Snackbar>
+    }
        
         
     async function updateDish(dish){
+        setErr(!err)
         const config={
             headers:{
                 'Content-Type':'application/json'
@@ -39,13 +72,16 @@ export const GlobalProvider=({children})=>{
             
         }
         catch(err){
-            setErr(err)
+            if(err.response===400)
+    setErr(err)
+            
             // dispatch({
             //     type:'DISH_ERROR',
             //     payload:err.res.data.error
             // })
              console.log(err)
         }
+        
     }
     
 
@@ -82,6 +118,7 @@ export const GlobalProvider=({children})=>{
 
 
 async function addDish(dish){
+    
     const config={
         headers:{
             'Content-Type':'application/json'
@@ -94,11 +131,13 @@ async function addDish(dish){
         payload:res.data.data
 
     })
+   
     
     console.log(dish)
 }
-catch(err){
-    setErr(err)
+catch(error){
+    if(error.response.status===400){
+    setErr(true)}
     // dispatch({
     //     type:'DISH_ERROR',
     //     payload:err.res.data.error
@@ -119,7 +158,7 @@ function deleteDish(id){
 
 
 return (<GlobalContext.Provider value={{
-    dishes:state.dishes,addDish,deleteDish,getDish,error:state.error,loading:state.loading,getpageDish,updateDish,err
+    dishes:state.dishes,addDish,deleteDish,getDish,error:state.error,loading:state.loading,getpageDish,updateDish,err,fsnackbar,tsnackbar
 }}>
     {children}
 </GlobalContext.Provider>

@@ -14,6 +14,8 @@ import { Stack } from "@mui/material";
 import Chip from "material-ui/Chip";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import {Fsnackbar,Tsnackbar} from "./Bar"
+
 // import { set } from "mongoose";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -54,33 +56,33 @@ align-items:center;
 const AddDishes = (props) => {
   console.log(props);
   const [show, setShow] = useState(true);
-  const [open,setOpen] = useState(false);
-  const { dishes,err } = useContext(GlobalContext);
-  const [error,setError] = useState();
+  const [open, setOpen] = useState(false);
+  const { dishes, err } = useContext(GlobalContext);
+  const [error, setError] = useState();
   useEffect(() => {
     console.log(props);
-    setShow(true)
-    setOpen(false)
-    if(err){
-      setError(true)
-    }
-    else{
-      setError(false)
-    }
-    
+    // setShow(true);
+    // setOpen(false);
+    // setError(err)
+    // if(err){
+    //   setError(true)
+    // }
+    // else{
+    //   setError(false)
+    // }
+
     // setData(dishes);
   }, [props]);
-  
+
   // const [data, setData] = useState();
-  
+
   const [dishName, setText] = useState("");
   const [ingridient, setText1] = useState("");
   const { addDish } = useContext(GlobalContext);
   // const [input, setInput] = useState('');
   const [tags, setTags] = useState([]);
 
-  
-  const [btn, setBtn] = useState(true);
+  const [btn, setBtn] = useState(false);
 
   const onChange = (e) => {
     const { value } = e.target;
@@ -107,48 +109,44 @@ const AddDishes = (props) => {
   };
 
   const onSubmit = (e) => {
-    
+    setError(false);
     const newDishes = {
       id: Math.floor(Math.random() * 100000),
-      dishName:dishName.toLowerCase(),
+      dishName: dishName.toLowerCase(),
       ingridient: tags,
-    
+    };
+
+    addDish(newDishes);
+    // setOpen(true)
+    setError(false)
+    if (err) {
+      setError(true);
+      setOpen(false)
+        } else {
+      setOpen(true);
+      setBtn(false)
+      setError(false);
+      // setOpen(true)
+      
     }
-       
-      addDish(newDishes);
-      
-      if(error===false){
-        // setOn(false)
-        setOpen(true);
-        setBtn(false);
-      
-      
-      
-      }
-      else{
-        setOpen(false);
-        setBtn(true);
-        
-      }
-  }
-  
-      // function Snackbar(){
-      //   return (<Snackbar
-      //     className="alert"
-      //     open={on}
-      //     autoHideDuration={3000}
-      //     onClose={handleClose}
-      //   >
-      //     <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-      //       Dish already exist
-      //     </Alert>
-      //   </Snackbar>)
-      // }
-      // setTimeout(function () {
-      //   setShow(0);
-      // }, 35000);
-    
-  
+  };
+
+  // function Snackbar(){
+  //   return (<Snackbar
+  //     className="alert"
+  //     open={on}
+  //     autoHideDuration={3000}
+  //     onClose={handleClose}
+  //   >
+  //     <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+  //       Dish already exist
+  //     </Alert>
+  //   </Snackbar>)
+  // }
+  // setTimeout(function () {
+  //   setShow(0);
+  // }, 35000);
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -176,14 +174,13 @@ const AddDishes = (props) => {
           {/* <h1>{props.dishName}</h1> */}
           <div>
             <TextField
-            
               fullWidth
               label="Enter Dish name"
               onChange={(e) => setText(e.target.value)}
               required
               value={dishName}
-              helperText={!error? "Dish name is required" : "Dish Already exists"}
-              error={error?true:false}
+              helperText={(error ?  "Dish Already exists":"")}
+              error={error ? true : false}
             />
 
             {/* <Ingridients  onChange={(e)=>seText1(e.target.value)} data={ingridient}/> */}
@@ -213,8 +210,9 @@ const AddDishes = (props) => {
             </div>
             <br />
             <br />
-            
-            { dishName && tags.length > 0 ? (
+
+            {(dishName && tags.length > 0)||btn==true ? (
+
               <Button2 variant="outlined" onClick={onSubmit}>
                 Add
               </Button2>
@@ -227,7 +225,7 @@ const AddDishes = (props) => {
 
           <Snackbar
             className="alert"
-            open={open===true}
+            open={open === true}
             autoHideDuration={3000}
             onClose={handleClose}
           >
@@ -248,6 +246,6 @@ const AddDishes = (props) => {
         </form>
       </div>
     </div>
-  ) : null
-            }
+  ) : null;
+};
 export default AddDishes;

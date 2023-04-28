@@ -35,7 +35,7 @@ const Div2 = styled(Paper)`
 `;
 
 const Border = styled(Card)`
-  width: 250px;
+  width: 310px;
   height: 50px;
   cursor: pointer;
   border-radius: 8px;
@@ -56,7 +56,7 @@ const Button1 = styled(Button)`
 `;
 
 const Text = styled(TextField)`
-  width: 64%;
+  width: 80%;
 
   bottom: 30px;
   left: 20px;
@@ -78,7 +78,7 @@ const Div1 = styled(Paper)`
 const Button3 = styled(Button)`
   position: absolute;
   bottom: 92%;
-  left: 230px;
+  left: 220px;
 `;
 
 const DishCard = (props) => {
@@ -190,9 +190,8 @@ const DishCard = (props) => {
                   >
                     <a>
                       <StyledCardContent>
-                        {" "}
-                        {dish.dishName.charAt(0).toUpperCase() +
-                          dish.dishName.slice(1)}
+                        
+                        {(dish.dishName)}
                       </StyledCardContent>
                     </a>
                   </Border>
@@ -205,9 +204,8 @@ const DishCard = (props) => {
                   >
                     <a>
                       <StyledCardContent>
-                        {" "}
-                        {dish.dishName.charAt(0).toUpperCase() +
-                          dish.dishName.slice(1)}
+                        
+                        {(dish.dishName)}
                       </StyledCardContent>
                     </a>
                   </Border>
@@ -243,7 +241,7 @@ const DishCard = (props) => {
                       count={npage}
                       onChange={handleChangePage}
                       color="primary"
-                      size="small"
+                      size="medium"
                     >
                       {users
                         .slice(
