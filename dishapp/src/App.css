@@ -1,11 +1,17 @@
 .column{
-  width: auto;
   box-sizing: border-box;
-  position: absolute;
-  
-  
-  
-  
+ position: absolute;
+  align-content:center;
+  width: 390px;
+ top: 120%;
+ height: auto;
+ flex: 1;
+
+ 
+
+ margin-left: 800px;
+
+ text-align: center  ;
 
 }
 
@@ -23,18 +29,18 @@
   margin-bottom: 200px;
 } */
 .column1 {
-  box-sizing: content-box;
-  position: absolute;
-  align-content:center;
-  width: 100%;
- top: 2%;
- height: auto;
+  box-sizing: border-box;
  
+  align-content:center;
+  width: 390px;
+ top: 0%;
+ height: auto;
+ flex: 1;
 
  
- 
-  left: 500px;
-  right: 500px;
+
+ margin-left: 800px;
+
  text-align: center  ;
   }
 /* .column4 {
@@ -56,9 +62,8 @@
 
 
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+  
+  display: flexbox;
 }
 
 /* .container1 {
@@ -104,14 +109,25 @@ a :hover{
    
   
   }
+  .fontclr{
+    font-weight: bold;
+    position: relative;
+   
+    color: rgb(55, 85, 150);
+   margin-left: 0%;
+   
+   
+   top: 2%;
+  
+  }
 .fontcolor{
   font-weight: bold;
-  position: absolute;
-  color: rgb(55, 85, 150);
- left: 25%;
- margin-bottom: 10%;
  
- top: 0%;
+  color: rgb(55, 85, 150);
+ margin-left: 20%;
+ 
+ 
+ top: 2%;
 
 }
 .fontcolor1{
@@ -214,9 +230,9 @@ left:60px;
 
 
 .btn1{
-  position: absolute;
-  top: 80%;
-  left: 2%;
+  position: static;
+  top:0%;
+  
  
 }
 
@@ -233,3 +249,43 @@ left:60px;
   
   width: 80%;
 }
+/* @media screen and (Max-width:768px) {
+  .row{width: auto;
+  } 
+    .column{
+        width: auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .column1{
+      /* width: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        flex-flow: column; 
+   */
+   /* @media (max-width: 600px) {
+    .row {
+      flex-direction: column;
+      flex-flow: column;
+    }
+    .column {
+      order: 1;
+      width: 100%;
+    }
+    
+}
+@media (max-width: 150px) {
+  .row {
+    flex-direction: column;
+    flex-flow: column;
+  }
+  .column {
+    order: 1;
+    width: 100%;
+  }
+  .column1 {
+    float: inline-end;
+    order: 2;
+   width: 100%;
+  }
+} */

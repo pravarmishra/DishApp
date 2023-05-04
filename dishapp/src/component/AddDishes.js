@@ -10,11 +10,13 @@ import "../App.css";
 import styled from "@emotion/styled";
 // import Card from "material-ui/Card";
 import Paper from "material-ui/Paper";
-import { Stack } from "@mui/material";
+import { Card, Stack } from "@mui/material";
 import Chip from "material-ui/Chip";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import {Fsnackbar,Tsnackbar} from "./Bar"
+// import {Fsnackbar,Tsnackbar} from "./Bar";
+import Grid from '@mui/material/Grid';
+
 
 // import { set } from "mongoose";
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -22,8 +24,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 const Button2 = styled(Button)`
   position: absolute;
-  left: 35%;
-  top: 100%;
+  left: 34%;
+  bottom: 3%;
 `;
 
 const Text = styled(TextField)`
@@ -38,20 +40,23 @@ const Text1 = styled(TextField)`
   left: 0%;
   top: 80%;
 `;
-const Div1 = styled(Paper)`
+const Div1 = styled(Card)`
 
-
-width:auto;
-height:400px;
+  position: relative;
+  margin-top: 5%;
+  left:-40%;
+ marin left: 0%;
+width:400px;
+height:auto;
 cursor:pointer;
 border-radius:8px;
-margin-left:400px;
-margin-top:0px;
-padding-top:20px
+padding-left:50px;
+padding-right:50px;
+padding-top:20px;
 align-items:center;
- &:hover {
-    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
-  }`;
+padding-bottom:50px;
+
+`;
 
 const AddDishes = (props) => {
   console.log(props);
@@ -117,7 +122,7 @@ const AddDishes = (props) => {
     };
 
     addDish(newDishes);
-    // setOpen(true)
+    
     setError(false)
     if (err) {
       setError(true);
@@ -126,26 +131,12 @@ const AddDishes = (props) => {
       setOpen(true);
       setBtn(false)
       setError(false);
-      // setOpen(true)
+      
       
     }
   };
 
-  // function Snackbar(){
-  //   return (<Snackbar
-  //     className="alert"
-  //     open={on}
-  //     autoHideDuration={3000}
-  //     onClose={handleClose}
-  //   >
-  //     <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-  //       Dish already exist
-  //     </Alert>
-  //   </Snackbar>)
-  // }
-  // setTimeout(function () {
-  //   setShow(0);
-  // }, 35000);
+ 
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -164,14 +155,15 @@ const AddDishes = (props) => {
 
   return show ? (
     <div>
-      <div className="column1">
-        <h1 className="fontcolor2">Add Dish</h1>
+      
+         <>
+         
+        <h1 className="fontcolor">Add Dish</h1>
         <br />
-        <br />
-        <br />
+        
 
         <form onSubmit={onSubmit}>
-          {/* <h1>{props.dishName}</h1> */}
+          
           <div>
             <TextField
               fullWidth
@@ -183,7 +175,7 @@ const AddDishes = (props) => {
               error={error ? true : false}
             />
 
-            {/* <Ingridients  onChange={(e)=>seText1(e.target.value)} data={ingridient}/> */}
+           
             <div>
               <div>
                 <br />
@@ -223,28 +215,12 @@ const AddDishes = (props) => {
             )}
           </div>
 
-          <Snackbar
-            className="alert"
-            open={open === true}
-            autoHideDuration={3000}
-            onClose={handleClose}
-          >
-            <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
-              Dish is being verified
-            </Alert>
-          </Snackbar>
-          {/* <Snackbar
-          className="alert"
-          open={!open}
-          autoHideDuration={3000}
-          onClose={handleClose1}
-        >
-          <Alert onClose={handleClose1} severity="error" sx={{ width: "100%" }}>
-            Dish already exist
-          </Alert>
-        </Snackbar> */}
+          
+          
         </form>
-      </div>
+        </>
+        
+     
     </div>
   ) : null;
 };

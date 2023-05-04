@@ -38,9 +38,9 @@ const Text1 = styled(TextField)`
   top: 75%;
 `;
 const Button3 = styled(Button)`
-  position: absolute;
-  left: 35%;
-  top: 100%;
+position: absolute;
+left: 34%;
+bottom: 3%;
 `;
 
 const Div1 = styled(Paper)`
@@ -58,10 +58,7 @@ const Div1 = styled(Paper)`
       0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
   }
 `;
-// align-items:center;
-//  &:hover {
-//     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
-//   }
+
 
 const Stack1 = styled(Stack)`
   max-width: 20% !important;
@@ -77,41 +74,40 @@ const EditDishes = (props) => {
     setShow(true);
   }, [props]);
 
-  const [dishName, setText] = useState("");
-  const [ingridient, setText1] = useState("");
+  const [dishName, setText] = useState(" ");
+  const [ingridient, setText1] = useState(" ");
  
 
-  const [tags, setTags] = useState(props.props.ingridient);
+  const [tags, setTags] = useState(props.ing);
   const [open, setOpen] = useState(false);
   const [btn, setBtn] = useState(true);
   useEffect(() => {
-    setText(props.props.dishName);
-  }, []);
+    setText(props.dishName);
+    
+  }, [props]);
 
   console.log(props);
 
   const onSubmit = (e) => {
     let newDishes = {
-      id: props.props._id,
+      id: props.id,
       dishName,
       ingridient: tags,
     };
     console.log("abc", newDishes);
 
     updateDish(newDishes);
-    // window.location.reload(false)
+ 
 if(!err){
     
-    // setOpen(true);
+    
     setError(false)
 }
 else{
   
   setError(true)
 }
-    // setTimeout(function () {
-    //   setShow(false);
-    // }, 3500);
+   
   };
   const onChange = (e) => {
     const { value } = e.target;
@@ -147,14 +143,14 @@ else{
 
   return show ? (
     <div>
-      <div className="column1">
-        {/* // <Div1 > */}
+      < >
+      
+        
         <h1 className="fontcolor">Edit Dish</h1>
         <br />
-        <br />
-        <br />
+        
         <form onSubmit={onSubmit}>
-          {/* <h1>{props.dishName}</h1> */}
+          
           <div>
             <TextField
               fullWidth
@@ -165,7 +161,7 @@ else{
               error={error?true:false}
             />
 
-            {/* <Ingredients  onChange={(e)=>seText1(e.target.value)} data={props.props.ingridient}/> */}
+            
 
             <br />
             <Stack
@@ -212,8 +208,8 @@ else{
             </Alert>
           </Snackbar>
         </form>
-        {/* // </Div1> */}
-      </div>
+        
+      </>
     </div>
   ) : null;
 };

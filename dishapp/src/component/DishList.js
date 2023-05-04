@@ -14,9 +14,12 @@ import Paper from "material-ui/Paper";
 // import Alert from "@mui/material";
 import EditDishes from "./EditDishes";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Grid from "@mui/material/Grid";
 // import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 // import ChevronRightSharpIcon from '@mui/icons-material/ChevronRightSharp';
 // import ChevronLeftSharpIcon from '@mui/icons-material/ChevronLeftSharp';
+
+const isMobile = window.innerWidth < 700;
 
 const Div2 = styled(Paper)`
   * {
@@ -25,13 +28,74 @@ const Div2 = styled(Paper)`
   width: 390px;
   height: 720px;
   cursor: pointer;
-  margin: 0px !important;
-
+  
+margin-right:0px;
   align-items: center;
   &:hover {
     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
       0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
   }
+`;
+// const StaffEditorPageContainer = styled.div`
+//     height: ${isMobile ? `auto`:`calc(100vh - 64px)`};
+//     width:100%;
+//     background-color:white;
+//     padding:10px 15px;
+//     ${isMobile && `
+//     position: relative;
+//     top:56px;
+//     `}`
+const Div6 = styled(Card)`
+
+  position: relative;
+  margin-top: 2%;
+  
+ margin-left: 25%;
+width:400px;
+height:auto;
+cursor:pointer;
+border-radius:8px;
+padding-left:50px;
+padding-right:50px;
+padding-top:20px;
+align-items:center;
+padding-bottom:50px;
+
+`;
+const Div7 = styled(Paper)`
+
+  position: relative;
+  margin-top: 2%;
+  
+ margin-left: 0%;
+width:390px;
+height:auto;
+cursor:pointer;
+border-radius:8px;
+padding-left:50px;
+padding-right:50px;
+padding-top:20px;
+align-items:center;
+padding-bottom:50px;
+border-top:1px solid;
+
+`;
+const Div8 = styled(Paper)`
+
+  position: relative;
+  margin-top: 0% !important;
+  
+ margin-left: 50%;
+width:390px;
+height:auto;
+cursor:pointer;
+border-radius:8px;
+padding-left:50px;
+padding-right:50px;
+padding-top:20px;
+align-items:center;
+padding-bottom:50px;
+
 `;
 
 const Border = styled(Card)`
@@ -49,6 +113,8 @@ const StyledCardContent = styled(CardContent)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+  
 `;
 const Button1 = styled(Button)`
   width: 1px;
@@ -76,8 +142,8 @@ const Div1 = styled(Paper)`
 `;
 
 const Button3 = styled(Button)`
-  position: absolute;
-  bottom: 92%;
+  position: relative;
+  bottom: 8%;
   left: 220px;
 `;
 
@@ -92,10 +158,9 @@ const DishCard = (props) => {
   useEffect(() => {
     setUsers(dishes);
     setShow(0);
-    
+    console.log(isMobile);
   }, [dishes]);
   const [search, setSearch] = useState("");
-  
 
   // const [show, setShow] = useState(null);
   const recordsPerPage = 7;
@@ -106,10 +171,14 @@ const DishCard = (props) => {
   const npage = Math.ceil(users.length / itemsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
   const [page, setPage] = useState(1);
-  const [state, updatedState] = useState(-1);
-
+  const [state, updatedState] = useState();
+  const [showEditDish, showEdit]=useState(null);
+  // const [props,setProps]=useState()
+const [dish,SetDishname]=useState();
+const [ing,seting]=useState();
   useEffect(() => {
     getDish();
+    
   }, []);
   const handleChangePage = (e, value) => {
     setCurrentPage(value);
@@ -128,65 +197,56 @@ const DishCard = (props) => {
     setCurrentPage(1);
   };
 
-  function handleEdit(id, dish) {
+  function handleEdit(id,dishName,ingridient) {
     setShow(1);
 
     updatedState(id);
+    SetDishname(dishName);
+    seting(ingridient);
 
     console.log("click");
   }
-  // function handleAdd(){
-  //   if (show===0 ||show===1){
-  //     setShow(2);
-  //   }
-  //   if(show===2){
-  //     setShow(0);
-  //     setShow(2);
-  //   }
-  //   else{
-  //     setShow(2)
-  //   }
-  // }
+  
 
   return (
     <div>
-      <div className="row">
-        <div className="column">
-          <Div2>
-            <h1 className="fontcolor1">Dishes</h1>
-            <a>
-              <Button3
-                startIcon={<AddCircleIcon />}
-                variant="outlined"
-                onClick={() => setShow(2)}
-              >
-                Create
-              </Button3>
-            </a>
-            <br />
-            <br />
 
-            <div>
-              <Text
-                variant="outlined"
-                label="Search"
-                type="text"
-                value={search}
-                onChange={onChange}
-              />
+<Grid container spacing={2}>
+  <Grid item xs={12} md={6} >
+      
+        
+              <Div2>
+                <h1 className="fontcolor1">Dishes</h1>
+                <a>
+                  <Button3
+                    startIcon={<AddCircleIcon />}
+                    variant="outlined"
+                    onClick={() => setShow(2)}
+                  >
+                    Create
+                  </Button3>
+                </a>
+                <br />
+                <br />
 
-              <br />
-            </div>
-
-            {records.map((dish) =>
-              state === dish._id && show == 1 ? (
                 <div>
-                  <div>
-                    <EditDishes props={dish} />
-                  </div>
+                  <Text
+                    variant="outlined"
+                    label="Search"
+                    type="text"
+                    value={search}
+                    onChange={onChange}
+                  />
+
+                  <br />
+                </div>
+
+                {records.map((dish) =>
+               (
+                <div><div>
                   <Border
                     variant="outlined"
-                    onClick={() => handleEdit(dish._id)}
+                    onClick={() => handleEdit(dish._id,dish.dishName,dish.ingridient)}
                   >
                     <a>
                       <StyledCardContent>
@@ -194,116 +254,62 @@ const DishCard = (props) => {
                         {(dish.dishName)}
                       </StyledCardContent>
                     </a>
-                  </Border>
+                  </Border></div>
+                  
                 </div>
-              ) : (
-                <div>
-                  <Border
-                    variant="outlined"
-                    onClick={() => handleEdit(dish._id)}
-                  >
-                    <a>
-                      <StyledCardContent>
-                        
-                        {(dish.dishName)}
-                      </StyledCardContent>
-                    </a>
-                  </Border>
-                </div>
-              )
+              ),
+              
             )}
 
-            {/* <p>{state?<EditDishes props={dish}/>:null}</p> */}
+               
 
-            {/* {records.map((dish)=>(
-       <Border variant="outlined"  onClick={()=>handleEdit(dish._id)}><a> <StyledCardContent  > {dish.dishName}</StyledCardContent></a></Border>
+             
+                <br />
 
-       
-         
-        ))} */}
-            <br />
-
-            <>
-              <div className="btn1">
-                {/* <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={changeCPage}
-        pageRangeDisplayed={5}
-        pageCount={numbers}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      /> */}{" "}
-                <div>
-                  <Stack>
-                    <Pagination
-                      page={currentPage}
-                      count={npage}
-                      onChange={handleChangePage}
-                      color="primary"
-                      size="medium"
-                    >
-                      {users
-                        .slice(
-                          (currentPage - 1) * itemsPerPage,
-                          currentPage * itemsPerPage
-                        )
-                        .map((item) => (
-                          <div key={item.id}>{item.dishName}</div>
-                        ))}
-                    </Pagination>
-                  </Stack>
-                  {/* <ButtonGroup className="wrap" variant="outlined" size="small">
-                    {currentPage != 1 ? (
-                      <Button1 onClick={() => PrevPage()}>P</Button1>
-                    ) : null}
-                    {numbers.map((n, i) => (
-                      <a key={i}>
-                        <Button1 onClick={() => changeCPage(n)}>{n}</Button1>
-                      </a>
-                    ))}
-                    {currentPage != numbers.length ? (
-                      <Button1 onClick={() => nextPage()}>N</Button1>
-                    ) : null}
-                  </ButtonGroup> */}
-                </div>
-              </div>
-            </>
-            {show === 2 ? (
-              <div>
-                <AddDishes />
-              </div>
-            ) : null}
-          </Div2>
+                <>
+                  <div className="btn1">
+                    {" "}
+                    <div>
+                      <Stack>
+                        <Pagination
+                          page={currentPage}
+                          count={npage}
+                          onChange={handleChangePage}
+                          color="primary"
+                          size="medium"
+                        >
+                          {users
+                            .slice(
+                              (currentPage - 1) * itemsPerPage,
+                              currentPage * itemsPerPage
+                            )
+                            .map((item) => (
+                              <div key={item.id}>{item.dishName}</div>
+                            ))}
+                        </Pagination>
+                      </Stack>
+                   
+                    </div>
+                  </div>
+                </>
+              </Div2>
+              </Grid>
+            
+          
+        
+        {show === 2 ? (
+                <Grid item xs={12} md={6}>
+                  <Div7>
+                  <AddDishes /></Div7>
+               </Grid>
+              ) : null}
+              {show===1?( <Grid item xs={12} md={6}><Div7><EditDishes dishName={dish} id={state} ing={ing}/></Div7></Grid>):null}
+        </Grid>
+      
+      
         </div>
-      </div>
-      {/* {show?<div><AddDishes/></div>:null} */}
-    </div>
-  );}
+  );
+};
 
-//   function PrevPage() {
-//     if (currentPage !== firstIndex) {
-//       setCurrentPage(currentPage - 1);
-//     }
-//     if (currentPage === 1) {
-//       setCurrentPage(currentPage);
-//     }
-//   }
-//   function nextPage() {
-//     if (currentPage !== lastIndex) {
-//       setCurrentPage(currentPage + 1);
-//     }
-//     if (currentPage === numbers.length) {
-//       setCurrentPage(currentPage);
-//     }
-//   }
-//   function changeCPage(id) {
-//     setCurrentPage(id);
-
-//     // const article={page:id}
-//     // axios.post('api/v1/dishes/page',article)
-//     // .then(response => console.log(response));
-//   }
-// };
-
+//   
 export default DishCard;
