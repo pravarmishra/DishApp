@@ -8,8 +8,9 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { ButtonGroup, Card, CardContent, Pagination } from "@mui/material";
-import { styled } from "@mui/material";
+// import { styled } from "@mui/material";
 import Paper from "material-ui/Paper";
+import styled from "@emotion/styled";
 // import axios from "axios";
 // import Alert from "@mui/material";
 import EditDishes from "./EditDishes";
@@ -19,13 +20,13 @@ import Grid from "@mui/material/Grid";
 // import ChevronRightSharpIcon from '@mui/icons-material/ChevronRightSharp';
 // import ChevronLeftSharpIcon from '@mui/icons-material/ChevronLeftSharp';
 
-const isMobile = window.innerWidth < 700;
+const isMobile = window.innerWidth < 900;
 
 const Div2 = styled(Paper)`
-  * {
-    margin-top: 1px;
-  }
-  width: 390px;
+  
+    margin-top: 0px;
+  
+  width: ${isMobile?`880px`:'390px'};
   height: 720px;
   cursor: pointer;
   
@@ -68,7 +69,7 @@ const Div7 = styled(Paper)`
   margin-top: 2%;
   
  margin-left: 0%;
-width:390px;
+width:${isMobile?`880px`:'390px'};
 height:auto;
 cursor:pointer;
 border-radius:8px;
@@ -99,11 +100,11 @@ padding-bottom:50px;
 `;
 
 const Border = styled(Card)`
-  width: 310px;
+  width: ${isMobile?`600px`:`310px`};
   height: 50px;
   cursor: pointer;
   border-radius: 8px;
-  margin-left: 20px;
+  margin-left:${isMobile?`100px`: `20px`};
   &:hover {
     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
       0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
@@ -125,7 +126,7 @@ const Text = styled(TextField)`
   width: 80%;
 
   bottom: 30px;
-  left: 20px;
+  left: ${isMobile?`60px`:`20px`};
 `;
 const Div1 = styled(Paper)`
   position: absolute;
@@ -144,9 +145,19 @@ const Div1 = styled(Paper)`
 const Button3 = styled(Button)`
   position: relative;
   bottom: 8%;
-  left: 220px;
+  left:${isMobile?`620px`: `220px`};
 `;
 
+const Head1=styled.h1`
+font-weight: bold;
+  color: rgb(62, 97, 173);
+  margin-left:${isMobile?`40px`:`0px`};
+ margin-top: 0px;
+ padding-top: 20px;
+ padding-left: 20px;`
+
+const Stack1=styled(Stack)`
+margin-left:${isMobile?`230px`:`0px`};`
 const DishCard = (props) => {
   const { deleteDish } = useContext(GlobalContext);
   const { dishes, getDish, getpageDish, dishName, ingridient, _id } =
@@ -211,12 +222,12 @@ const [ing,seting]=useState();
   return (
     <div>
 
-<Grid container spacing={2}>
+<Grid container spacing={2} >
   <Grid item xs={12} md={6} >
       
-        
+        <div >
               <Div2>
-                <h1 className="fontcolor1">Dishes</h1>
+                <Head1>Dishes</Head1>
                 <a>
                   <Button3
                     startIcon={<AddCircleIcon />}
@@ -267,10 +278,10 @@ const [ing,seting]=useState();
                 <br />
 
                 <>
-                  <div className="btn1">
+                  <div >
                     {" "}
                     <div>
-                      <Stack>
+                      <Stack1>
                         <Pagination
                           page={currentPage}
                           count={npage}
@@ -287,20 +298,21 @@ const [ing,seting]=useState();
                               <div key={item.id}>{item.dishName}</div>
                             ))}
                         </Pagination>
-                      </Stack>
+                      </Stack1>
                    
                     </div>
                   </div>
                 </>
-              </Div2>
+              </Div2></div>
               </Grid>
             
           
         
         {show === 2 ? (
-                <Grid item xs={12} md={6}>
+                <Grid item  xs={12} md={6}>
+                  <div>
                   <Div7>
-                  <AddDishes /></Div7>
+                  <AddDishes /></Div7></div>
                </Grid>
               ) : null}
               {show===1?( <Grid item xs={12} md={6}><Div7><EditDishes dishName={dish} id={state} ing={ing}/></Div7></Grid>):null}

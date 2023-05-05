@@ -17,14 +17,14 @@ import MuiAlert from "@mui/material/Alert";
 // import {Fsnackbar,Tsnackbar} from "./Bar";
 import Grid from '@mui/material/Grid';
 
-
+const isMobile = window.innerWidth < 900;
 // import { set } from "mongoose";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const Button2 = styled(Button)`
   position: absolute;
-  left: 34%;
+  left: ${isMobile?`45%`:`39%`};
   bottom: 3%;
 `;
 
@@ -57,6 +57,14 @@ align-items:center;
 padding-bottom:50px;
 
 `;
+const Head1=styled.h1`
+font-weight: bold;
+ 
+color: rgb(55, 85, 150);
+margin-left:${isMobile?`40%`: `20%`};
+
+
+top: 2%;`
 
 const AddDishes = (props) => {
   console.log(props);
@@ -158,7 +166,7 @@ const AddDishes = (props) => {
       
          <>
          
-        <h1 className="fontcolor">Add Dish</h1>
+        <Head1>Add Dish</Head1>
         <br />
         
 

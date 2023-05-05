@@ -9,12 +9,12 @@ import "../App.css";
 import styled from "@emotion/styled";
 // import Card from "material-ui/Card";
 import Paper from "material-ui/Paper";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { Chip, RadioButton } from "material-ui";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-
+const isMobile = window.innerWidth < 900;
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -39,7 +39,7 @@ const Text1 = styled(TextField)`
 `;
 const Button3 = styled(Button)`
 position: absolute;
-left: 34%;
+left: ${isMobile?`45%`:`39%`};
 bottom: 3%;
 `;
 
@@ -63,6 +63,14 @@ const Div1 = styled(Paper)`
 const Stack1 = styled(Stack)`
   max-width: 20% !important;
 `;
+const Head1=styled.h1`
+font-weight: bold;
+ 
+color: rgb(55, 85, 150);
+margin-left:${isMobile?`40%`: `20%`};
+
+
+top: 2%;`
 
 const EditDishes = (props) => {
   console.log(props);
@@ -146,7 +154,7 @@ else{
       < >
       
         
-        <h1 className="fontcolor">Edit Dish</h1>
+        <Head1>Edit Dish</Head1>
         <br />
         
         <form onSubmit={onSubmit}>
