@@ -31,6 +31,18 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 // top:25%;
 
 // `
+const Text = styled(TextField)`
+  
+ 
+
+
+  & input::placeholder {
+    font-size: ${isMobile?`66px`:``};}
+    & input {
+      height: ${isMobile?`40px`:``};
+      font-size: ${isMobile? `26px`:``};
+    } 
+`;
 const Text1 = styled(TextField)`
   position: relative;
 
@@ -67,8 +79,8 @@ const Head1=styled.h1`
 font-weight: bold;
  
 color: rgb(55, 85, 150);
-margin-left:${isMobile?`40%`: `20%`};
-
+margin-left:${isMobile?`37%`: `20%`};
+font-size:${isMobile?`3.5rem`:``};
 
 top: 2%;`
 
@@ -160,7 +172,7 @@ else{
         <form onSubmit={onSubmit}>
           
           <div>
-            <TextField
+            <Text
               fullWidth
               label="Enter Dish name"
               onChange={(e) => setText(e.target.value)}
@@ -185,7 +197,7 @@ else{
             </Stack>
             <br />
 
-            <TextField
+            <Text
               fullWidth
               value={ingridient}
               label="Enter Ingredients"

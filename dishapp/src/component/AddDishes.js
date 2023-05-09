@@ -26,19 +26,21 @@ const Button2 = styled(Button)`
   position: absolute;
   left: ${isMobile?`45%`:`39%`};
   bottom: 3%;
+  font-size: ${isMobile?`1.5rem`:``};
 `;
+
 
 const Text = styled(TextField)`
-  position: absolute;
-  top-margin: 5%;
-  left: 0%;
-  top: 30%;
-`;
-const Text1 = styled(TextField)`
-  position: absolute;
+  
+ 
 
-  left: 0%;
-  top: 80%;
+
+  & input::placeholder {
+    font-size: ${isMobile?`66px`:``};}
+    & input {
+      height: ${isMobile?`40px`:``};
+      font-size: ${isMobile? `26px`:``};
+    } 
 `;
 const Div1 = styled(Card)`
 
@@ -61,10 +63,23 @@ const Head1=styled.h1`
 font-weight: bold;
  
 color: rgb(55, 85, 150);
-margin-left:${isMobile?`40%`: `20%`};
-
+margin-left:${isMobile?`37%`: `20%`};
+font-size:${isMobile?`3.5rem`:``};
 
 top: 2%;`
+const Chip1 = styled(Chip)`
+height: 40px;
+font-size: 36px;
+padding: 10px;
+border-radius: 20px;
+
+& .MuiChip-label {
+  padding-right: 20px;
+  padding-left: 20px;
+  font-size: 36px;
+}
+
+`;
 
 const AddDishes = (props) => {
   console.log(props);
@@ -173,7 +188,7 @@ const AddDishes = (props) => {
         <form onSubmit={onSubmit}>
           
           <div>
-            <TextField
+            <Text
               fullWidth
               label="Enter Dish name"
               onChange={(e) => setText(e.target.value)}
@@ -193,14 +208,15 @@ const AddDishes = (props) => {
                   useFlexGap
                   marginTop={1}
                   spacing={1}
+                  
                 >
                   {tags.map((tag, index) => (
-                    <Chip onRequestDelete={() => deleteTag(index)}>{tag}</Chip>
+                    <Chip1 onRequestDelete={() => deleteTag(index)}>{tag}</Chip1>
                   ))}
                 </Stack>
               </div>
               <br />
-              <TextField
+              <Text
                 fullWidth
                 value={ingridient}
                 label="Enter ingredients"

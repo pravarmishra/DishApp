@@ -7,7 +7,7 @@ import "../App.css";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { ButtonGroup, Card, CardContent, Pagination } from "@mui/material";
+import { ButtonGroup, Card, CardContent, Pagination,Box } from "@mui/material";
 // import { styled } from "@mui/material";
 import Paper from "material-ui/Paper";
 import styled from "@emotion/styled";
@@ -27,7 +27,7 @@ const Div2 = styled(Paper)`
     margin-top: 0px;
   
   width: ${isMobile?`880px`:'390px'};
-  height: 720px;
+  height:${isMobile?`1200px`: `720px`};
   cursor: pointer;
   
 margin-right:0px;
@@ -101,10 +101,11 @@ padding-bottom:50px;
 
 const Border = styled(Card)`
   width: ${isMobile?`600px`:`310px`};
-  height: 50px;
+  height:${isMobile?`90px`:`50px`};
   cursor: pointer;
   border-radius: 8px;
   margin-left:${isMobile?`100px`: `20px`};
+  margin-bottom:${isMobile?`10px`:'1px'};
   &:hover {
     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
       0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
@@ -114,8 +115,8 @@ const StyledCardContent = styled(CardContent)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
-  
+  font-size:${isMobile?`30px`:``};
+  font-color:primary;
 `;
 const Button1 = styled(Button)`
   width: 1px;
@@ -124,9 +125,15 @@ const Button1 = styled(Button)`
 
 const Text = styled(TextField)`
   width: 80%;
-
+ 
   bottom: 30px;
   left: ${isMobile?`60px`:`20px`};
+  & input::placeholder {
+    font-size: ${isMobile?`66px`:``};}
+    & input {
+      height: ${isMobile?`60px`:``};
+      font-size: ${isMobile? `26px`:``};
+    } 
 `;
 const Div1 = styled(Paper)`
   position: absolute;
@@ -144,8 +151,11 @@ const Div1 = styled(Paper)`
 
 const Button3 = styled(Button)`
   position: relative;
-  bottom: 8%;
+  bottom: 5%;
   left:${isMobile?`620px`: `220px`};
+  font-size: ${isMobile?`1.5rem`:``};
+  margin-top: ${isMobile?`5px`: `-10px`};
+  
 `;
 
 const Head1=styled.h1`
@@ -154,10 +164,31 @@ font-weight: bold;
   margin-left:${isMobile?`40px`:`0px`};
  margin-top: 0px;
  padding-top: 20px;
- padding-left: 20px;`
+ padding-left: 20px;
+ font-size:${isMobile?`3.5rem`:``};`
 
 const Stack1=styled(Stack)`
-margin-left:${isMobile?`230px`:`0px`};`
+margin-left:${isMobile?`230px`:`30px`};
+margin-top:${isMobile?`40px`:`0px`};
+
+
+`
+
+const Pagination1=styled(Pagination)`
+font-base:large;
+width:375px;
+fontSize:2.5rem;
+& .MuiPaginationItem-root {
+  font-size: ${isMobile?`28px`:``}; 
+  & .Mui-selected {
+    font-size:${isMobile?`28px`:``}; 
+    min-width: ${isMobile?`60px`:``};
+    min-height: ${isMobile?`60px`:``};
+  }
+  
+}
+`
+
 const DishCard = (props) => {
   const { deleteDish } = useContext(GlobalContext);
   const { dishes, getDish, getpageDish, dishName, ingridient, _id } =
@@ -223,13 +254,13 @@ const [ing,seting]=useState();
     <div>
 
 <Grid container spacing={2} >
-  <Grid item xs={12} md={6} >
-      
+  <Grid item xs={12} md={6} sm={8} sx={{ display: 'flex', alignItems: 'center' }}>
+  {/* <Box sx={{ minHeight: '800px' }}> */}
         <div >
               <Div2>
                 <Head1>Dishes</Head1>
                 <a>
-                  <Button3
+                  <Button3 size="small"
                     startIcon={<AddCircleIcon />}
                     variant="outlined"
                     onClick={() => setShow(2)}
@@ -247,6 +278,7 @@ const [ing,seting]=useState();
                     type="text"
                     value={search}
                     onChange={onChange}
+                    
                   />
 
                   <br />
@@ -282,11 +314,13 @@ const [ing,seting]=useState();
                     {" "}
                     <div>
                       <Stack1>
-                        <Pagination
+                        <Pagination1
                           page={currentPage}
                           count={npage}
                           onChange={handleChangePage}
                           color="primary"
+                       
+                          siblingCount={0}
                           size="medium"
                         >
                           {users
@@ -297,25 +331,26 @@ const [ing,seting]=useState();
                             .map((item) => (
                               <div key={item.id}>{item.dishName}</div>
                             ))}
-                        </Pagination>
+                        </Pagination1>
                       </Stack1>
                    
                     </div>
                   </div>
                 </>
               </Div2></div>
+              {/* </Box> */}
               </Grid>
             
           
         
         {show === 2 ? (
-                <Grid item  xs={12} md={6}>
+                <Grid item  xs={12} md={6} sm={4} >
                   <div>
                   <Div7>
                   <AddDishes /></Div7></div>
                </Grid>
               ) : null}
-              {show===1?( <Grid item xs={12} md={6}><Div7><EditDishes dishName={dish} id={state} ing={ing}/></Div7></Grid>):null}
+              {show===1?( <Grid item xs={12} md={6} sm={4}><Div7><EditDishes dishName={dish} id={state} ing={ing}/></Div7></Grid>):null}
         </Grid>
       
       
