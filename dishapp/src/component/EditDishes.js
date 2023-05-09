@@ -10,7 +10,7 @@ import styled from "@emotion/styled";
 // import Card from "material-ui/Card";
 import Paper from "material-ui/Paper";
 import { Stack, Typography } from "@mui/material";
-import { Chip, RadioButton } from "material-ui";
+import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -32,62 +32,65 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 // `
 const Text = styled(TextField)`
-  
- 
+  & label {
+    font-size: ${isMobile ? `30px` : ``};
+    background-color: #ffffff;
+  }
 
-
-  & input::placeholder {
-    font-size: ${isMobile?`66px`:``};}
-    & input {
-      height: ${isMobile?`40px`:``};
-      font-size: ${isMobile? `26px`:``};
-    } 
-`;
-const Text1 = styled(TextField)`
-  position: relative;
-
-  left: 0%;
-  top: 75%;
-`;
-const Button3 = styled(Button)`
-position: absolute;
-left: ${isMobile?`45%`:`39%`};
-bottom: 3%;
-`;
-
-const Div1 = styled(Paper)`
-  position: absolute;
-  background: #333;
-  width: 35%;
-  height: 50%;
-  cursor: pointer;
-  border-radius: 8px;
-  margin-left: 300px;
-  right: 310px;
-  top: 120px;
-  &:hover {
-    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
-      0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+  & input {
+    height: ${isMobile ? `50px` : ``};
+    font-size: ${isMobile ? `29px` : ``};
   }
 `;
+// const Text1 = styled(TextField)`
+//   position: relative;
 
-
-const Stack1 = styled(Stack)`
-  max-width: 20% !important;
+//   left: 0%;
+//   top: 75%;
+// `;
+const Button3 = styled(Button)`
+  position: absolute;
+  left: ${isMobile ? `47%` : `39%`};
+  bottom: 3%;
 `;
-const Head1=styled.h1`
-font-weight: bold;
- 
-color: rgb(55, 85, 150);
-margin-left:${isMobile?`37%`: `20%`};
-font-size:${isMobile?`3.5rem`:``};
 
-top: 2%;`
+// const Div1 = styled(Paper)`
+//   position: absolute;
+//   background: #333;
+//   width: 35%;
+//   height: 50%;
+//   cursor: pointer;
+//   border-radius: 8px;
+//   margin-left: 300px;
+//   right: 310px;
+//   top: 120px;
+//   &:hover {
+//     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
+//       0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+//   }
+// `;
+
+// const Stack1 = styled(Stack)`
+//   max-width: 20% !important;
+// `;
+const Head1 = styled.h1`
+  font-weight: bold;
+
+  color: rgb(55, 85, 150);
+  margin-left: ${isMobile ? `33%` : `20%`};
+  font-size: ${isMobile ? `4rem` : ``};
+
+  top: 2%;
+`;
+const Chip1 = styled(Chip)`
+  padding: ${isMobile ? `10px` : ``};
+  font-size: ${isMobile ? `25px` : ``};
+`;
 
 const EditDishes = (props) => {
   console.log(props);
-  const { updateDish,err } = useContext(GlobalContext);
-  const [error,setError]=useState()
+  const { updateDish, err } = useContext(GlobalContext);
+  const [error, setError] = useState();
   const [show, setShow] = useState(true);
   useEffect(() => {
     console.log(props);
@@ -96,14 +99,12 @@ const EditDishes = (props) => {
 
   const [dishName, setText] = useState(" ");
   const [ingridient, setText1] = useState(" ");
- 
 
   const [tags, setTags] = useState(props.ing);
   const [open, setOpen] = useState(false);
   const [btn, setBtn] = useState(true);
   useEffect(() => {
     setText(props.dishName);
-    
   }, [props]);
 
   console.log(props);
@@ -117,17 +118,12 @@ const EditDishes = (props) => {
     console.log("abc", newDishes);
 
     updateDish(newDishes);
- 
-if(!err){
-    
-    
-    setError(false)
-}
-else{
-  
-  setError(true)
-}
-   
+
+    if (!err) {
+      setError(false);
+    } else {
+      setError(true);
+    }
   };
   const onChange = (e) => {
     const { value } = e.target;
@@ -163,26 +159,22 @@ else{
 
   return show ? (
     <div>
-      < >
-      
-        
+      <>
         <Head1>Edit Dish</Head1>
         <br />
-        
+
         <form onSubmit={onSubmit}>
-          
           <div>
             <Text
               fullWidth
               label="Enter Dish name"
               onChange={(e) => setText(e.target.value)}
               value={dishName}
-              helperText={!error? "" : "Dish Already exists"}
-              error={error?true:false}
+              helperText={!error ? "" : "Dish Already exists"}
+              error={error ? true : false}
             />
 
-            
-
+            <br />
             <br />
             <Stack
               marginTop={1}
@@ -192,9 +184,14 @@ else{
               spacing={1}
             >
               {tags.map((tag, index) => (
-                <Chip onRequestDelete={() => deleteTag(index)}>{tag}</Chip>
+                <Chip1
+                  label={tag}
+                  key={tag}
+                  onDelete={() => deleteTag(index)}
+                />
               ))}
             </Stack>
+            <br />
             <br />
 
             <Text
@@ -207,7 +204,7 @@ else{
 
             <br />
             <br />
-            { dishName && tags.length > 0 ? (
+            {dishName && tags.length > 0 ? (
               <Button3 variant="outlined" onClick={onSubmit}>
                 Update
               </Button3>
@@ -228,7 +225,6 @@ else{
             </Alert>
           </Snackbar>
         </form>
-        
       </>
     </div>
   ) : null;

@@ -11,11 +11,11 @@ import styled from "@emotion/styled";
 // import Card from "material-ui/Card";
 import Paper from "material-ui/Paper";
 import { Card, Stack } from "@mui/material";
-import Chip from "material-ui/Chip";
+import Chip from "@mui/material/Chip";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 // import {Fsnackbar,Tsnackbar} from "./Bar";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 
 const isMobile = window.innerWidth < 900;
 // import { set } from "mongoose";
@@ -24,61 +24,50 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 const Button2 = styled(Button)`
   position: absolute;
-  left: ${isMobile?`45%`:`39%`};
+  left: ${isMobile ? `47%` : `39%`};
   bottom: 3%;
-  font-size: ${isMobile?`1.5rem`:``};
+  font-size: ${isMobile ? `1.5rem` : ``};
 `;
-
 
 const Text = styled(TextField)`
-  
- 
+  & label {
+    font-size: ${isMobile ? `30px` : ``};
+    background-color: #ffffff;
+  }
 
-
-  & input::placeholder {
-    font-size: ${isMobile?`66px`:``};}
-    & input {
-      height: ${isMobile?`40px`:``};
-      font-size: ${isMobile? `26px`:``};
-    } 
+  & input {
+    font-size: ${isMobile ? `35px` : ``};
+  }
 `;
-const Div1 = styled(Card)`
+// const Div1 = styled(Card)`
 
-  position: relative;
-  margin-top: 5%;
-  left:-40%;
- marin left: 0%;
-width:400px;
-height:auto;
-cursor:pointer;
-border-radius:8px;
-padding-left:50px;
-padding-right:50px;
-padding-top:20px;
-align-items:center;
-padding-bottom:50px;
+//   position: relative;
+//   margin-top: 5%;
+//   left:-40%;
+//  marin left: 0%;
+// width:400px;
+// height:auto;
+// cursor:pointer;
+// border-radius:8px;
+// padding-left:50px;
+// padding-right:50px;
+// padding-top:20px;
+// align-items:center;
+// padding-bottom:50px;
 
+// `;
+const Head1 = styled.h1`
+  font-weight: bold;
+
+  color: rgb(55, 85, 150);
+  margin-left: ${isMobile ? `33%` : `20%`};
+  font-size: ${isMobile ? `4rem` : ``};
+
+  top: 2%;
 `;
-const Head1=styled.h1`
-font-weight: bold;
- 
-color: rgb(55, 85, 150);
-margin-left:${isMobile?`37%`: `20%`};
-font-size:${isMobile?`3.5rem`:``};
-
-top: 2%;`
 const Chip1 = styled(Chip)`
-height: 40px;
-font-size: 36px;
-padding: 10px;
-border-radius: 20px;
-
-& .MuiChip-label {
-  padding-right: 20px;
-  padding-left: 20px;
-  font-size: 36px;
-}
-
+  padding: ${isMobile ? `10px` : ``};
+  font-size: ${isMobile ? `25px` : ``};
 `;
 
 const AddDishes = (props) => {
@@ -145,21 +134,17 @@ const AddDishes = (props) => {
     };
 
     addDish(newDishes);
-    
-    setError(false)
+
+    setError(false);
     if (err) {
       setError(true);
-      setOpen(false)
-        } else {
+      setOpen(false);
+    } else {
       setOpen(true);
-      setBtn(false)
+      setBtn(false);
       setError(false);
-      
-      
     }
   };
-
- 
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -178,15 +163,11 @@ const AddDishes = (props) => {
 
   return show ? (
     <div>
-      
-         <>
-         
+      <>
         <Head1>Add Dish</Head1>
         <br />
-        
 
         <form onSubmit={onSubmit}>
-          
           <div>
             <Text
               fullWidth
@@ -194,13 +175,13 @@ const AddDishes = (props) => {
               onChange={(e) => setText(e.target.value)}
               required
               value={dishName}
-              helperText={(error ?  "Dish Already exists":"")}
+              helperText={error ? "Dish Already exists" : ""}
               error={error ? true : false}
             />
 
-           
             <div>
               <div>
+                <br />
                 <br />
                 <Stack
                   direction="row"
@@ -208,13 +189,17 @@ const AddDishes = (props) => {
                   useFlexGap
                   marginTop={1}
                   spacing={1}
-                  
                 >
                   {tags.map((tag, index) => (
-                    <Chip1 onRequestDelete={() => deleteTag(index)}>{tag}</Chip1>
+                    <Chip1
+                      label={tag}
+                      key={tag}
+                      onDelete={() => deleteTag(index)}
+                    />
                   ))}
                 </Stack>
               </div>
+              <br />
               <br />
               <Text
                 fullWidth
@@ -227,8 +212,7 @@ const AddDishes = (props) => {
             <br />
             <br />
 
-            {(dishName && tags.length > 0)||btn==true ? (
-
+            {(dishName && tags.length > 0) || btn == true ? (
               <Button2 variant="outlined" onClick={onSubmit}>
                 Add
               </Button2>
@@ -238,13 +222,8 @@ const AddDishes = (props) => {
               </Button2>
             )}
           </div>
-
-          
-          
         </form>
-        </>
-        
-     
+      </>
     </div>
   ) : null;
 };
