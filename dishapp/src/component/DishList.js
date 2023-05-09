@@ -11,14 +11,11 @@ import { ButtonGroup, Card, CardContent, Pagination, Box } from "@mui/material";
 // import { styled } from "@mui/material";
 import Paper from "material-ui/Paper";
 import styled from "@emotion/styled";
-// import axios from "axios";
-// import Alert from "@mui/material";
+
 import EditDishes from "./EditDishes";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Grid from "@mui/material/Grid";
-// import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-// import ChevronRightSharpIcon from '@mui/icons-material/ChevronRightSharp';
-// import ChevronLeftSharpIcon from '@mui/icons-material/ChevronLeftSharp';
+
 
 const isMobile = window.innerWidth < 900;
 
