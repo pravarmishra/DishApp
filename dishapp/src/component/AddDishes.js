@@ -23,21 +23,22 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const Button2 = styled(Button)`
-  position: absolute;
-  left: ${isMobile ? `47%` : `39%`};
+  
+  left: ${isMobile ? `30%` : `35%`};
   bottom: 3%;
-  font-size: ${isMobile ? `1.5rem` : ``};
+  font-size: ${isMobile ? `1rem` : ``};
 `;
 
 const Text = styled(TextField)`
-  & label {
-    font-size: ${isMobile ? `30px` : ``};
-    background-color: #ffffff;
-  }
 
-  & input {
-    font-size: ${isMobile ? `35px` : ``};
-  }
+
+& label {
+  font-size: ${isMobile ? `20px` : ``};
+  background-color: #ffffff;
+}
+& input {
+  font-size: ${isMobile ? `15px` : ``};
+}
 `;
 // const Div1 = styled(Card)`
 
@@ -57,17 +58,20 @@ const Text = styled(TextField)`
 
 // `;
 const Head1 = styled.h1`
+ 
+
+  
   font-weight: bold;
-
-  color: rgb(55, 85, 150);
-  margin-left: ${isMobile ? `33%` : `20%`};
-  font-size: ${isMobile ? `4rem` : ``};
-
-  top: 2%;
+  color: rgb(62, 97, 173);
+  margin-left: ${isMobile ? `20px` : `30px`};
+  margin-top: 0px;
+  padding-top: 20px;
+  padding-left: 20px;
+  font-size: ${isMobile ? `2rem` : ``};
 `;
 const Chip1 = styled(Chip)`
-  padding: ${isMobile ? `10px` : ``};
-  font-size: ${isMobile ? `25px` : ``};
+  padding: ${isMobile ? `` : ``};
+  font-size: ${isMobile ? `` : ``};
 `;
 
 const AddDishes = (props) => {

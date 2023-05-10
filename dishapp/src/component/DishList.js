@@ -18,20 +18,25 @@ import Grid from "@mui/material/Grid";
 
 
 const isMobile = window.innerWidth < 900;
-
+const Wrapper = styled.div`
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+`;
 const Div2 = styled(Paper)`
   margin-top: 0px;
-
-  width: ${isMobile ? `880px` : "390px"};
-  height: ${isMobile ? `1200px` : `720px`};
+  margin-right:0px;
+  width: ${isMobile ? `100%` : "390px"};
+  height: ${isMobile ? `720px` : `720px`};
   cursor: pointer;
 
-  margin-right: 0px;
+  
   align-items: center;
   &:hover {
     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
       0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
   }
+  
 `;
 // const StaffEditorPageContainer = styled.div`
 //     height: ${isMobile ? `auto`:`calc(100vh - 64px)`};
@@ -64,7 +69,7 @@ const Div7 = styled(Paper)`
   margin-top: 2%;
 
   margin-left: 0%;
-  width: ${isMobile ? `880px` : "390px"};
+  width: ${isMobile ? `100%` : "390px"};
   height: auto;
   cursor: pointer;
   border-radius: 8px;
@@ -94,11 +99,11 @@ const Div7 = styled(Paper)`
 // `;
 
 const Border = styled(Card)`
-  width: ${isMobile ? `600px` : `310px`};
-  height: ${isMobile ? `90px` : `50px`};
+  width: ${isMobile ? `70%` : `310px`};
+  height: ${isMobile ? `50px` : `50px`};
   cursor: pointer;
   border-radius: 8px;
-  margin-left: ${isMobile ? `100px` : `20px`};
+  margin-left: ${isMobile ? `10%` : `20px`};
   margin-bottom: ${isMobile ? `10px` : "1px"};
   &:hover {
     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
@@ -109,7 +114,7 @@ const StyledCardContent = styled(CardContent)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: ${isMobile ? `30px` : ``};
+  font-size: ${isMobile ? `` : ``};
   font-color: primary;
 `;
 // const Button1 = styled(Button)`
@@ -120,14 +125,14 @@ const StyledCardContent = styled(CardContent)`
 const Text = styled(TextField)`
   width: 80%;
 
-  bottom: 30px;
-  left: ${isMobile ? `60px` : `20px`};
+  margin-bottom: 10px;
+  left: ${isMobile ? `20px` : `20px`};
   & label {
-    font-size: ${isMobile ? `30px` : ``};
+    font-size: ${isMobile ? `20px` : ``};
     background-color: #ffffff;
   }
   & input {
-    font-size: ${isMobile ? `35px` : ``};
+    font-size: ${isMobile ? `15px` : ``};
   }
 `;
 // const Div1 = styled(Paper)`
@@ -145,36 +150,37 @@ const Text = styled(TextField)`
 // `;
 
 const Button3 = styled(Button)`
-  position: relative;
-  bottom: 5%;
-  left: ${isMobile ? `620px` : `220px`};
-  font-size: ${isMobile ? `1.5rem` : ``};
-  margin-top: ${isMobile ? `-29px` : `-10px`};
+ position:relative;
+
+
+  margin-left: ${isMobile ? `55%` : `220px`};
+  font-size: ${isMobile ? `1rem` : ``};
+  margin-top: ${isMobile ? `-30%` : `-25%`};
 `;
 
 const Head1 = styled.h1`
   font-weight: bold;
   color: rgb(62, 97, 173);
-  margin-left: ${isMobile ? `40px` : `0px`};
+  margin-left: ${isMobile ? `4%` : `0px`};
   margin-top: 0px;
   padding-top: 20px;
   padding-left: 20px;
-  font-size: ${isMobile ? `4.5rem` : ``};
+  font-size: ${isMobile ? `2.5rem` : ``};
 `;
 
 const Stack1 = styled(Stack)`
-  margin-left: ${isMobile ? `240px` : `30px`};
-  margin-top: ${isMobile ? `40px` : `0px`};
+  margin-left: ${isMobile ? `8%` : `30px`};
+  margin-top: ${isMobile ? `20px` : `30px`};
 `;
 
 const Pagination1 = styled(Pagination)`
   font-base: large;
-  width: 375px;
+  margin-top:30px;
   fontsize: 2.5rem;
   & .MuiPaginationItem-root {
-    font-size: ${isMobile ? `28px` : ``};
+    font-size: ${isMobile ? `` : ``};
     & .Mui-selected {
-      font-size: ${isMobile ? `28px` : ``};
+      font-size: ${isMobile ? `` : ``};
       min-width: ${isMobile ? `60px` : ``};
       min-height: ${isMobile ? `60px` : ``};
     }
@@ -241,27 +247,26 @@ const DishList = (props) => {
   }
 
   return (
-    <div>
+    
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} >
           {/* <Box sx={{ minHeight: '800px' }}> */}
           <div>
-            <Div2>
+            <Div2><>
               <Head1>Dishes</Head1>
-              <a>
+             
                 <Button3
                   size="small"
-                  startIcon={<AddCircleIcon style={{ fontSize: isMobile?'2rem':'' }} />}
+                  startIcon={<AddCircleIcon style={{ fontSize: isMobile?'1rem':'' }} />}
                   variant="outlined"
                   onClick={() => setShow(2)}
+                  
                 >
                   Create
                 </Button3>
-              </a>
-              <br />
-              <br />
-
-              <div>
+              </>
+              
+              <>
                 <Text
                   variant="outlined"
                   label="Search"
@@ -270,8 +275,8 @@ const DishList = (props) => {
                   onChange={onChange}
                 />
 
-                <br />
-              </div>
+                
+              </>
 
               {records.map((dish) => (
                 <div>
@@ -290,7 +295,7 @@ const DishList = (props) => {
                 </div>
               ))}
 
-              <br />
+              
 
               <>
                 <div>
@@ -324,7 +329,7 @@ const DishList = (props) => {
         </Grid>
 
         {show === 2 ? (
-          <Grid item xs={12} md={6} sm={4}>
+          <Grid item xs={12} md={6} >
             <div>
               <Div7>
                 <AddDishes />
@@ -333,14 +338,14 @@ const DishList = (props) => {
           </Grid>
         ) : null}
         {show === 1 ? (
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} >
             <Div7>
               <EditDishes dishName={dish} id={state} ing={ing} />
             </Div7>
           </Grid>
         ) : null}
       </Grid>
-    </div>
+    
   );
 };
 
