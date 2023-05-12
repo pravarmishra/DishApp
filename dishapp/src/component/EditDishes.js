@@ -1,13 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "./context/GlobalState";
-// import Ingredients from "./Ingridients";
-// import TextField from 'material-ui/TextField'
 import TextField from "@mui/material/TextField";
-// import RaisedButton from 'material-ui/RaisedButton'
-// import AppReducer from "./context/AppReducer";
 import "../App.css";
 import styled from "@emotion/styled";
-// import Card from "material-ui/Card";
 import Paper from "material-ui/Paper";
 import { Stack, Typography } from "@mui/material";
 import Chip from "@mui/material/Chip";
@@ -18,19 +13,7 @@ const isMobile = window.innerWidth < 900;
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-// const Button2=styled(RaisedButton)`
 
-// position:absolute;
-
-// left: 45%;`
-
-// const Text=styled(TextField)`
-// position:absolute;
-// top-margin:5%;
-// left: 0%;
-// top:25%;
-
-// `
 const Text = styled(TextField)`
 
 & label {
@@ -41,42 +24,19 @@ const Text = styled(TextField)`
   font-size: ${isMobile ? `15px` : ``};
 }
 `;
-// const Text1 = styled(TextField)`
-//   position: relative;
 
-//   left: 0%;
-//   top: 75%;
-// `;
 const Button3 = styled(Button)`
   
-  left: ${isMobile ? `30%` : `29%`};
+  margin-left: ${isMobile ? `35%` : `34%`};
   bottom: 3%;
   font-size: ${isMobile ? `1rem` : ``};
 `;
 
-// const Div1 = styled(Paper)`
-//   position: absolute;
-//   background: #333;
-//   width: 35%;
-//   height: 50%;
-//   cursor: pointer;
-//   border-radius: 8px;
-//   margin-left: 300px;
-//   right: 310px;
-//   top: 120px;
-//   &:hover {
-//     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
-//       0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
-//   }
-// `;
 
-// const Stack1 = styled(Stack)`
-//   max-width: 20% !important;
-// `;
 const Head1 = styled.h1`
 font-weight: bold;
 color: rgb(62, 97, 173);
-margin-left: ${isMobile ? `20px` : `30px`};
+margin-left: ${isMobile ? `60px` : `50px`};
 margin-top: 0px;
 padding-top: 20px;
 padding-left: 20px;
@@ -90,14 +50,16 @@ const Chip1 = styled(Chip)`
 const EditDishes = (props) => {
   console.log(props);
   const { updateDish, err } = useContext(GlobalContext);
-  const [error, setError] = useState();
+  const [error, setError] = useState('');
   const [show, setShow] = useState(true);
   useEffect(() => {
     console.log(props);
-    setShow(true);
+    
+    
+    setError(err);
   }, [props]);
 
-  const [dishName, setText] = useState(" ");
+  const [dishName, setText] = useState("");
   const [ingridient, setText1] = useState(" ");
 
   const [tags, setTags] = useState(props.ing);
@@ -112,8 +74,9 @@ const EditDishes = (props) => {
 
   const onSubmit = (e) => {
     let newDishes = {
-      id: props.id,
-      dishName,
+      id:props.id,
+      dishName:dishName,
+
       ingridient: tags,
     };
     console.log("abc", newDishes);
@@ -122,13 +85,15 @@ const EditDishes = (props) => {
 
     if (!err) {
       setError(false);
+      
     } else {
+      
       setError(true);
     }
   };
   const onChange = (e) => {
     const { value } = e.target;
-    setText1(value);
+    setText(value);
   };
 
   const onKeyDown = (e) => {
@@ -169,10 +134,9 @@ const EditDishes = (props) => {
             <Text
               fullWidth
               label="Enter Dish name"
-              onChange={(e) => setText(e.target.value)}
+              onChange={onChange}
               value={dishName}
-              helperText={!error ? "" : "Dish Already exists"}
-              error={error ? true : false}
+              
             />
 
             <br />
@@ -200,7 +164,7 @@ const EditDishes = (props) => {
               value={ingridient}
               label="Enter Ingredients"
               onKeyDown={onKeyDown}
-              onChange={onChange}
+              onChange={(e)=>setText(e.target.value)}
             />
 
             <br />

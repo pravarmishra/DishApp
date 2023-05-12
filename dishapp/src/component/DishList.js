@@ -3,19 +3,18 @@ import { GlobalContext } from "./context/GlobalState";
 import AddDishes from "./AddDishes";
 
 import "../App.css";
-// import ReactPaginate from "react-paginate";
+
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { ButtonGroup, Card, CardContent, Pagination, Box } from "@mui/material";
-// import { styled } from "@mui/material";
+
 import Paper from "material-ui/Paper";
 import styled from "@emotion/styled";
 
 import EditDishes from "./EditDishes";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Grid from "@mui/material/Grid";
-
 
 const isMobile = window.innerWidth < 900;
 const Wrapper = styled.div`
@@ -25,45 +24,18 @@ const Wrapper = styled.div`
 `;
 const Div2 = styled(Paper)`
   margin-top: 0px;
-  margin-right:0px;
+  margin-right: 0px;
   width: ${isMobile ? `100%` : "390px"};
-  height: ${isMobile ? `720px` : `720px`};
+  height: ${isMobile ? `755px` : `720px`};
   cursor: pointer;
 
-  
   align-items: center;
   &:hover {
     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
       0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
   }
-  
 `;
-// const StaffEditorPageContainer = styled.div`
-//     height: ${isMobile ? `auto`:`calc(100vh - 64px)`};
-//     width:100%;
-//     background-color:white;
-//     padding:10px 15px;
-//     ${isMobile && `
-//     position: relative;
-//     top:56px;
-//     `}`
-// const Div6 = styled(Card)`
 
-//   position: relative;
-//   margin-top: 2%;
-
-//  margin-left: 25%;
-// width:400px;
-// height:auto;
-// cursor:pointer;
-// border-radius:8px;
-// padding-left:50px;
-// padding-right:50px;
-// padding-top:20px;
-// align-items:center;
-// padding-bottom:50px;
-
-// `;
 const Div7 = styled(Paper)`
   position: relative;
   margin-top: 2%;
@@ -80,30 +52,15 @@ const Div7 = styled(Paper)`
   padding-bottom: 50px;
   border-top: 1px solid;
 `;
-// const Div8 = styled(Paper)`
 
-//   position: relative;
-//   margin-top: 0% !important;
-
-//  margin-left: 50%;
-// width:390px;
-// height:auto;
-// cursor:pointer;
-// border-radius:8px;
-// padding-left:50px;
-// padding-right:50px;
-// padding-top:20px;
-// align-items:center;
-// padding-bottom:50px;
-
-// `;
 
 const Border = styled(Card)`
   width: ${isMobile ? `70%` : `310px`};
   height: ${isMobile ? `50px` : `50px`};
   cursor: pointer;
   border-radius: 8px;
-  margin-left: ${isMobile ? `10%` : `20px`};
+  margin-right: 20%;
+  margin-left: ${isMobile ? `14%` : `20px`};
   margin-bottom: ${isMobile ? `10px` : "1px"};
   &:hover {
     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
@@ -117,16 +74,13 @@ const StyledCardContent = styled(CardContent)`
   font-size: ${isMobile ? `` : ``};
   font-color: primary;
 `;
-// const Button1 = styled(Button)`
-//   width: 1px;
-//   position: relative;
-// `;
+
 
 const Text = styled(TextField)`
   width: 80%;
 
   margin-bottom: 10px;
-  left: ${isMobile ? `20px` : `20px`};
+  margin-left: ${isMobile ? `37px` : `20px`};
   & label {
     font-size: ${isMobile ? `20px` : ``};
     background-color: #ffffff;
@@ -135,33 +89,21 @@ const Text = styled(TextField)`
     font-size: ${isMobile ? `15px` : ``};
   }
 `;
-// const Div1 = styled(Paper)`
-//   position: absolute;
-//   width: 35%;
-//   height: 50%;
-//   cursor: pointer;
-//   border-radius: 8px;
-//   margin-left: 300px;
-//   right: 310px;
-//   top: 120px;
-//   // &:hover {
-//   //   box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
-//   // }
-// `;
+
 
 const Button3 = styled(Button)`
- position:relative;
+  position: relative;
 
-
-  margin-left: ${isMobile ? `55%` : `220px`};
+  margin-left: ${isMobile ? `37%` : `220px`};
   font-size: ${isMobile ? `1rem` : ``};
-  margin-top: ${isMobile ? `-30%` : `-25%`};
+  margin-top: ${isMobile ? `0%` : `-25%`};
+  margin-bottom: ${isMobile ? `5%` : ``};
 `;
 
 const Head1 = styled.h1`
   font-weight: bold;
   color: rgb(62, 97, 173);
-  margin-left: ${isMobile ? `4%` : `0px`};
+  margin-left: ${isMobile ? `29%` : `0px`};
   margin-top: 0px;
   padding-top: 20px;
   padding-left: 20px;
@@ -169,13 +111,14 @@ const Head1 = styled.h1`
 `;
 
 const Stack1 = styled(Stack)`
-  margin-left: ${isMobile ? `8%` : `30px`};
-  margin-top: ${isMobile ? `20px` : `30px`};
+position: relative;  
+  margin-left: ${isMobile ? `15%` : `30px`};
+  margin-top: ${isMobile ? `40px` : `30px`};
 `;
 
 const Pagination1 = styled(Pagination)`
   font-base: large;
-  margin-top:30px;
+
   fontsize: 2.5rem;
   & .MuiPaginationItem-root {
     font-size: ${isMobile ? `` : ``};
@@ -214,8 +157,8 @@ const DishList = (props) => {
   const [state, updatedState] = useState();
   const [showEditDish, showEdit] = useState(null);
   // const [props,setProps]=useState()
-  const [dish, SetDishname] = useState();
-  const [ing, seting] = useState();
+  const [dish, SetDishname] = useState("");
+  const [ing, seting] = useState("");
   useEffect(() => {
     getDish();
   }, []);
@@ -247,107 +190,102 @@ const DishList = (props) => {
   }
 
   return (
-    
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6} >
-          {/* <Box sx={{ minHeight: '800px' }}> */}
-          <div>
-            <Div2><>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={6}>
+        {/* <Box sx={{ minHeight: '800px' }}> */}
+        <div>
+          <Div2>
+            <>
               <Head1>Dishes</Head1>
-             
-                <Button3
-                  size="small"
-                  startIcon={<AddCircleIcon style={{ fontSize: isMobile?'1rem':'' }} />}
-                  variant="outlined"
-                  onClick={() => setShow(2)}
-                  
-                >
-                  Create
-                </Button3>
-              </>
-              
-              <>
-                <Text
-                  variant="outlined"
-                  label="Search"
-                  type="text"
-                  value={search}
-                  onChange={onChange}
-                />
+              <Button3
+                size="small"
+                startIcon={
+                  <AddCircleIcon style={{ fontSize: isMobile ? "1rem" : "" }} />
+                }
+                variant="outlined"
+                onClick={() => setShow(2)}
+              >
+                Create
+              </Button3>
+            </>
+            <br />
+            <>
+              <Text
+                variant="outlined"
+                label="Search"
+                type="text"
+                value={search}
+                onChange={onChange}
+              />
+            </>
 
-                
-              </>
-
-              {records.map((dish) => (
+            {records.map((dish) => (
+              <div>
                 <div>
-                  <div>
-                    <Border
-                      variant="outlined"
-                      onClick={() =>
-                        handleEdit(dish._id, dish.dishName, dish.ingridient)
-                      }
+                  <Border
+                    variant="outlined"
+                    onClick={() =>
+                      handleEdit(dish._id, dish.dishName, dish.ingridient)
+                    }
+                  >
+                    <a>
+                      <StyledCardContent>{dish.dishName}</StyledCardContent>
+                    </a>
+                  </Border>
+                </div>
+              </div>
+            ))}
+
+            <>
+              <div>
+                {" "}
+                <div>
+                  <Stack1>
+                    <Pagination1
+                      page={currentPage}
+                      count={npage}
+                      onChange={handleChangePage}
+                      color="primary"
+                      siblingCount={0}
+                      size="medium"
                     >
-                      <a>
-                        <StyledCardContent>{dish.dishName}</StyledCardContent>
-                      </a>
-                    </Border>
-                  </div>
+                      {users
+                        .slice(
+                          (currentPage - 1) * itemsPerPage,
+                          currentPage * itemsPerPage
+                        )
+                        .map((item) => (
+                          <div key={item.id}>{item.dishName}</div>
+                        ))}
+                    </Pagination1>
+                  </Stack1>
                 </div>
-              ))}
-
-              
-
-              <>
-                <div>
-                  {" "}
-                  <div>
-                    <Stack1>
-                      <Pagination1
-                        page={currentPage}
-                        count={npage}
-                        onChange={handleChangePage}
-                        color="primary"
-                        siblingCount={0}
-                        size="medium"
-                      >
-                        {users
-                          .slice(
-                            (currentPage - 1) * itemsPerPage,
-                            currentPage * itemsPerPage
-                          )
-                          .map((item) => (
-                            <div key={item.id}>{item.dishName}</div>
-                          ))}
-                      </Pagination1>
-                    </Stack1>
-                  </div>
-                </div>
-              </>
-            </Div2>
-          </div>
-          {/* </Box> */}
-        </Grid>
-
-        {show === 2 ? (
-          <Grid item xs={12} md={6} >
-            <div>
-              <Div7>
-                <AddDishes />
-              </Div7>
-            </div>
-          </Grid>
-        ) : null}
-        {show === 1 ? (
-          <Grid item xs={12} md={6} >
-            <Div7>
-              <EditDishes dishName={dish} id={state} ing={ing} />
-            </Div7>
-          </Grid>
-        ) : null}
+              </div>
+            </>
+          </Div2>
+        </div>
+        {/* </Box> */}
       </Grid>
-    
+
+      {show === 2 ? (
+        <Grid item xs={12} md={6}>
+          <div>
+            <Div7>
+              <AddDishes />
+            </Div7>
+          </div>
+        </Grid>
+      ) : null}
+      {show === 1 ? (
+        <Grid item xs={12} md={6}>
+          <Div7>
+            <EditDishes dishName={dish} id={state} ing={ing} />
+          </Div7>
+        </Grid>
+      ) : null}
+    </Grid>
   );
 };
 
-//
+
 export default DishList;

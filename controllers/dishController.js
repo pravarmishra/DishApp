@@ -110,7 +110,7 @@ exports.addDishes=async(req,res,next)=>{
       
     });}
     catch(err){
-      return res.status(500).json({
+      return res.status(400).json({
         success: false,
         error: err
       });

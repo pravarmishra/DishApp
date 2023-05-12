@@ -1,30 +1,25 @@
 import React, { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "./context/GlobalState";
-// import Ingridients from "./Ingridients";
-// import TextField from 'material-ui/TextField'
 import TextField from "@mui/material/TextField";
-// import RaisedButton from 'material-ui/RaisedButton'
+
 import Button from "@mui/material/Button";
-// import AppReducer from "./context/AppReducer";
+
 import "../App.css";
 import styled from "@emotion/styled";
-// import Card from "material-ui/Card";
 import Paper from "material-ui/Paper";
 import { Card, Stack } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-// import {Fsnackbar,Tsnackbar} from "./Bar";
 import Grid from "@mui/material/Grid";
 
 const isMobile = window.innerWidth < 900;
-// import { set } from "mongoose";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const Button2 = styled(Button)`
   
-  left: ${isMobile ? `30%` : `35%`};
+  margin-left: ${isMobile ? `38%` : `37%`};
   bottom: 3%;
   font-size: ${isMobile ? `1rem` : ``};
 `;
@@ -40,30 +35,13 @@ const Text = styled(TextField)`
   font-size: ${isMobile ? `15px` : ``};
 }
 `;
-// const Div1 = styled(Card)`
-
-//   position: relative;
-//   margin-top: 5%;
-//   left:-40%;
-//  marin left: 0%;
-// width:400px;
-// height:auto;
-// cursor:pointer;
-// border-radius:8px;
-// padding-left:50px;
-// padding-right:50px;
-// padding-top:20px;
-// align-items:center;
-// padding-bottom:50px;
-
-// `;
 const Head1 = styled.h1`
  
 
   
   font-weight: bold;
   color: rgb(62, 97, 173);
-  margin-left: ${isMobile ? `20px` : `30px`};
+  margin-left: ${isMobile ? `47px` : `50px`};
   margin-top: 0px;
   padding-top: 20px;
   padding-left: 20px;
@@ -78,29 +56,16 @@ const AddDishes = (props) => {
   console.log(props);
   const [show, setShow] = useState(true);
   const [open, setOpen] = useState(false);
-  const { dishes, err } = useContext(GlobalContext);
-  const [error, setError] = useState();
+  const { addDish,err } = useContext(GlobalContext);
+
+  const [error, setError] = useState('');
   useEffect(() => {
     console.log(props);
-    // setShow(true);
-    // setOpen(false);
-    // setError(err)
-    // if(err){
-    //   setError(true)
-    // }
-    // else{
-    //   setError(false)
-    // }
-
-    // setData(dishes);
+    setError(err);
+   
   }, [props]);
-
-  // const [data, setData] = useState();
-
   const [dishName, setText] = useState("");
   const [ingridient, setText1] = useState("");
-  const { addDish } = useContext(GlobalContext);
-  // const [input, setInput] = useState('');
   const [tags, setTags] = useState([]);
 
   const [btn, setBtn] = useState(false);
@@ -130,8 +95,8 @@ const AddDishes = (props) => {
   };
 
   const onSubmit = (e) => {
-    setError(false);
-    const newDishes = {
+   
+    let newDishes = {
       id: Math.floor(Math.random() * 100000),
       dishName: dishName.toLowerCase(),
       ingridient: tags,
@@ -139,13 +104,12 @@ const AddDishes = (props) => {
 
     addDish(newDishes);
 
-    setError(false);
+    
     if (err) {
       setError(true);
-      setOpen(false);
+      
     } else {
-      setOpen(true);
-      setBtn(false);
+      
       setError(false);
     }
   };
@@ -177,15 +141,12 @@ const AddDishes = (props) => {
               fullWidth
               label="Enter Dish name"
               onChange={(e) => setText(e.target.value)}
-              required
               value={dishName}
-              helperText={error ? "Dish Already exists" : ""}
-              error={error ? true : false}
             />
 
             <div>
               <div>
-                <br />
+               
                 <br />
                 <Stack
                   direction="row"
@@ -204,7 +165,7 @@ const AddDishes = (props) => {
                 </Stack>
               </div>
               <br />
-              <br />
+             
               <Text
                 fullWidth
                 value={ingridient}

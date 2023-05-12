@@ -20,11 +20,11 @@ export const GlobalContext=createContext(initialState)
 export const GlobalProvider=({children})=>{
     const [state,dispatch]=useReducer(AppReducer,initialState)
     
-    const [err,setErr]=useState()
+    const [err,setErr]=useState("")
     //Actions
 
     useEffect(() => {
-        setErr(false)
+        setErr()
     },[])
     function tsnackbar(){
         return <Snackbar
@@ -53,7 +53,7 @@ export const GlobalProvider=({children})=>{
        
         
     async function updateDish(dish){
-        setErr(!err)
+      
         const config={
             headers:{
                 'Content-Type':'application/json'
@@ -66,24 +66,28 @@ export const GlobalProvider=({children})=>{
             dispatch({
                 type:'UPDATE_DISH',
                 payload:res.data.data
-        })
+                
+        }) 
+        getDish()
         console.log(dish)
-           getDish()
+          
             
         }
-        catch(err){
-            if(err.response===400)
-    setErr(err)
-            
-            // dispatch({
-            //     type:'DISH_ERROR',
-            //     payload:err.res.data.error
-            // })
-             console.log(err)
-        }
+        catch (err) {
+            if ( err.response.status === 400) {
+                setErr(err.response.data.error);
+                 dispatch({
+        type:'DISH_ERROR',
+        payload:err.res.data.error
+    })
+                }
+             else {
+              console.log(err)
+            }
         
     }
-    
+    setErr(false)
+}
 
     async function getDish(){
         try{
@@ -135,15 +139,18 @@ async function addDish(dish){
     
     console.log(dish)
 }
-catch(error){
-    if(error.response.status===400){
-    setErr(true)}
-    // dispatch({
-    //     type:'DISH_ERROR',
-    //     payload:err.res.data.error
-    // })
-    console.error(err);
-}
+catch(err){
+    if ( err.response.status === 400) {
+        setErr(err.response.data.error);
+         dispatch({
+type:'DISH_ERROR',
+payload:err.res.data.error
+})
+        }
+     else {
+      console.log(err)
+    }
+} setErr(false)
 }
 function deleteDish(id){
     dispatch({
